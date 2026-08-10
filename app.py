@@ -21,7 +21,7 @@ modulo = st.sidebar.selectbox("Elija un módulo", ["Home","Carga del dataset"])
 
 if modulo == "Home":
     home_html = dedent("""
-    <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; margin-top:12px;">
+    <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:10px; margin-top:12px;">
     <h3 style="margin-top:0;">Datos de la autora</h3>
     <ul style="line-height:1.6; padding-left:18px;">
       <li><strong>Nombre completo:</strong> Mónica Tahiz Rantes García</li>
