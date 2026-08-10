@@ -34,8 +34,7 @@ if modulo == "Home":
     <h3 style="margin-top:0;">Objetivo del análisis</h3>
     <p>
       Aplicar de forma integral los conceptos vistos a lo largo del curso, desarrollando para ello una aplicación interactiva, 
-      clara y bien estructurada; construida en Python utilizando Streamlit; orientada al Análisis Exploratorio de Datos (EDA) del 
-      dataset BankMarketing.csv. 
+      clara y bien estructurada; orientada al Análisis Exploratorio de Datos (EDA) del dataset BankMarketing.csv. 
     </p>
     </section>
 
