@@ -22,20 +22,20 @@ modulo = st.sidebar.selectbox("Elija un módulo", ["Home","Carga del dataset"])
 if modulo == "Home":
     home_html = dedent("""
     <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; margin-top:12px;">
-    <h3 style="margin-top:0;">Datos del proyecto</h3>
+    <h3 style="margin-top:0;">Datos del autor</h3>
     <ul style="line-height:1.6; padding-left:18px;">
-      <li><strong>Nombre completo del estudiante:</strong> Mónica Tahiz Rantes García</li>
-      <li><strong>Nombre del módulo:</strong> Módulo 1 – Python Fundamentals</li>
+      <li><strong>Nombre completo:</strong> Mónica Tahiz Rantes García</li>
+      <li><strong>Curso:</strong> Especialización en Python For Analytics</li>
       <li><strong>Año:</strong> 2026</li>
     </ul>
     </section>
 
     <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; margin-top:12px;">
-    <h3 style="margin-top:0;">Descripción del proyecto</h3>
+    <h3 style="margin-top:0;">Objetivo del análisis</h3>
     <p>
-      Se desarrolla una aplicación interactiva en Streamlit que integra los conceptos fundamentales
-      aprendidos durante el Módulo 1 del curso; incluyendo variables, estructuras de datos, control
-      de flujo, funciones, programación funcional, programación orientada a objetos (POO) y  operaciones básicas tipo CRUD.
+      Aplicar de forma integral los conceptos vistos a lo largo del curso, desarrollando para ello una aplicación interactiva, 
+      clara y bien estructurada; construida en Python utilizando Streamlit; orientada al Análisis Exploratorio de Datos (EDA) del 
+      dataset BankMarketing.csv. 
     </p>
     </section>
 
