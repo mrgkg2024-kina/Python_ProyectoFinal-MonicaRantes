@@ -22,7 +22,7 @@ modulo = st.sidebar.selectbox("Elija un módulo", ["Home","Carga del dataset"])
 if modulo == "Home":
     home_html = dedent("""
     <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; margin-top:12px;">
-    <h3 style="margin-top:0;">Datos del autor</h3>
+    <h3 style="margin-top:0;">Datos de la autora</h3>
     <ul style="line-height:1.6; padding-left:18px;">
       <li><strong>Nombre completo:</strong> Mónica Tahiz Rantes García</li>
       <li><strong>Curso:</strong> Especialización en Python For Analytics</li>
@@ -33,8 +33,18 @@ if modulo == "Home":
     <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; margin-top:12px;">
     <h3 style="margin-top:0;">Objetivo del análisis</h3>
     <p>
-      Aplicar de forma integral los conceptos vistos a lo largo del curso, desarrollando para ello una aplicación interactiva, 
-      clara y bien estructurada; orientada al Análisis Exploratorio de Datos (EDA) del dataset BankMarketing.csv. 
+      Aplicar de forma integral los conceptos vistos a lo largo del curso, orientando el proyecto al Análisis Exploratorio de Datos (EDA) 
+      del dataset BankMarketing.csv; considerando los datos de la de la última campaña para descubrir relaciones y comportamientos relevantes 
+      entre las variables. 
+    </p>
+    </section>
+
+     <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; margin-top:12px;">
+    <h3 style="margin-top:0;">Breve explicación del dataset</h3>
+    <p>
+      Aplicar de forma integral los conceptos vistos a lo largo del curso, orientando el proyecto al Análisis Exploratorio de Datos (EDA) 
+      del dataset BankMarketing.csv; considerando los datos de la de la última campaña para descubrir relaciones y comportamientos relevantes 
+      entre las variables. 
     </p>
     </section>
 
