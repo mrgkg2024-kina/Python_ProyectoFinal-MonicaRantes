@@ -18,7 +18,7 @@ st.sidebar.title("Menú")
 # *********************************************
 
 def load_data_from_bytes(file_bytes: bytes) -> pd.DataFrame:
-    return pd.read_csv(BytesIO(file_bytes))
+    return pd.read_csv(BytesIO(file_bytes), sep=';')
 
     
 # *********************************************
