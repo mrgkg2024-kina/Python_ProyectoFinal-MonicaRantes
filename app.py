@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 from textwrap import dedent
 
 
@@ -7,6 +8,17 @@ st.set_page_config(page_title="Proyecto Final- Caso Nro. 1", layout="centered")
 st.title("Proyecto Final - Caso de estudio #1")
 st.sidebar.title("Menú")
 
+
+# *********************************************
+# FUNCIONES
+# *********************************************
+
+def load_data_from_bytes(file_bytes: bytes) -> pd.DataFrame:
+    return pd.read_csv(BytesIO(file_bytes))
+
+def prepare_data(raw_df: pd.DataFrame) -> pd.DataFrame:
+    df = raw_df.copy()
+    
 # *********************************************
 # NAVEGACIÓN ENTRE LAS OPCIONES DEL MENU
 # *********************************************
@@ -76,7 +88,7 @@ else:
         )
         uploaded_file = st.file_uploader(
             "Fuente de datos",
-            type=["xlsx"],
+            type=["csv"],
             help="Puede cargar otra versión del dataset con la misma estructura.",
         )
     
@@ -85,10 +97,10 @@ else:
             raw_data = load_data_from_bytes(uploaded_file.getvalue())
             source_name = uploaded_file.name
         else:
-            st.info("Cargue el archivo Excel desde el panel lateral para iniciar el análisis.")
+            st.info("Cargue el archivo CSV desde el panel lateral para iniciar el análisis.")
             st.stop()
     except Exception as exc:
-        st.error(f"No fue posible leer el archivo Excel: {exc}")
+        st.error(f"No fue posible leer el archivo CSV: {exc}")
         st.stop()
     
     df = prepare_data(raw_data)
