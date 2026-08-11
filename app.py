@@ -20,8 +20,6 @@ st.sidebar.title("Menú")
 def load_data_from_bytes(file_bytes: bytes) -> pd.DataFrame:
     return pd.read_csv(BytesIO(file_bytes))
 
-def prepare_data(raw_df: pd.DataFrame) -> pd.DataFrame:
-    df = raw_df.copy()
     
 # *********************************************
 # NAVEGACIÓN ENTRE LAS OPCIONES DEL MENU
@@ -100,6 +98,11 @@ else:
         if uploaded_file is not None:
             raw_data = load_data_from_bytes(uploaded_file.getvalue())
             source_name = uploaded_file.name
+            
+            # Mostrar la vista previa en la app
+            st.subheader(f"Vista previa: {source_name}")
+            st.dataframe(raw_data.head(5))
+        
         else:
             st.info("Cargue el archivo CSV desde el panel lateral para iniciar el análisis.")
             st.stop()
@@ -107,8 +110,7 @@ else:
         st.error(f"No fue posible leer el archivo CSV: {exc}")
         st.stop()
     
-    df = prepare_data(raw_data)
-
+    
 
 
     
