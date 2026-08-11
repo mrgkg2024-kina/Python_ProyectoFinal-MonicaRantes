@@ -61,3 +61,39 @@ if modulo == "Home":
     """)
     st.components.v1.html(home_html, height=650, scrolling=True)
 
+else:
+# *********************************************
+# CARGA DEL DATASET
+# *********************************************    
+# -----------------------------------------------------------------------------
+# Carga del archivo
+# -----------------------------------------------------------------------------
+    with st.sidebar:
+        st.markdown("## Panel de segmentación")
+        st.markdown(
+            '<div class="filter-caption">Los gráficos y KPIs responden a todos los filtros seleccionados.</div>',
+            unsafe_allow_html=True,
+        )
+        uploaded_file = st.file_uploader(
+            "Fuente de datos",
+            type=["xlsx"],
+            help="Puede cargar otra versión del dataset con la misma estructura.",
+        )
+    
+    try:
+        if uploaded_file is not None:
+            raw_data = load_data_from_bytes(uploaded_file.getvalue())
+            source_name = uploaded_file.name
+        else:
+            st.info("Cargue el archivo Excel desde el panel lateral para iniciar el análisis.")
+            st.stop()
+    except Exception as exc:
+        st.error(f"No fue posible leer el archivo Excel: {exc}")
+        st.stop()
+    
+    df = prepare_data(raw_data)
+
+
+
+    
+
