@@ -71,8 +71,8 @@ if modulo == "Home":
     </section>
     </div>
     """)
-    st.components.v1.html(home_html, height=650, scrolling=True)
-
+    #st.components.v1.html(home_html, height=650, scrolling=True)
+    st.iframe(home_html, height=650, scrolling=True)
 else:
 # *********************************************
 # CARGA DEL DATASET
