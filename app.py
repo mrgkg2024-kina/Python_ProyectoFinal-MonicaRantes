@@ -85,7 +85,7 @@ else:
 # Carga del archivo
 # -----------------------------------------------------------------------------
     with st.sidebar:
-        st.markdown("## Panel de segmentación")
+        st.markdown("### Panel de segmentación")
         st.markdown(
             '<div class="filter-caption">Los gráficos y KPIs responden a todos los filtros seleccionados.</div>',
             unsafe_allow_html=True,
