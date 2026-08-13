@@ -101,7 +101,7 @@ else:
             
             # Mostrar la vista previa en la app
             st.subheader(f"Vista previa: {source_name}")
-            st.dataframe(raw_data.head(5))
+            st.dataframe(raw_data.head())
         
         else:
             st.info("Cargue el archivo CSV desde el panel lateral para iniciar el análisis.")
