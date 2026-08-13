@@ -102,7 +102,7 @@ else:
             # Mostrar la vista previa en la app
             st.subheader(f"Vista previa: {source_name}")
             st.dataframe(raw_data.head())
-            st.success(f"Dimensiones del dataset (filas, columnas): {raw_data.shape}")
+            st.success(f"Dimensiones del dataset (filas, columnas): **{raw_data.shape}**")
         
         else:
             st.info("Cargue el archivo CSV desde el panel lateral para iniciar el análisis.")
