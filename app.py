@@ -14,7 +14,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"  # "auto", "expanded" o "collapsed"
 )
 
-#st.set_page_config(page_title="Proyecto Final- Caso Nro. 1", layout="centered")
 st.title("Proyecto Final - Caso de estudio #1")
 st.sidebar.title("Menú")
 
