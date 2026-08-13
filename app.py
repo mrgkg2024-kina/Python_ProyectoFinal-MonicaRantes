@@ -52,18 +52,17 @@ if modulo == "Home":
     <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:15px; margin-top:12px;">
     <h3 style="margin-top:0;">Objetivo del análisis</h3>
     <p>
-      Aplicar de forma integral los conceptos vistos a lo largo del curso, orientando el proyecto al Análisis Exploratorio de Datos (EDA) 
-      del dataset BankMarketing.csv considerando los datos de la última campaña; ello para descubrir relaciones y comportamientos relevantes 
-      entre las variables. 
+      Aplicar de forma integral los conceptos vistos a lo largo del curso, orientando el proyecto al Análisis Exploratorio de Datos (EDA) del dataset 
+      BankMarketing.csv considerando los datos de la última campaña; ello para descubrir relaciones y comportamientos relevantes entre las variables. 
     </p>
     </section>
 
      <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:15px; margin-top:12px;">
     <h3 style="margin-top:0;">Breve explicación del dataset</h3>
     <p>
-      El archivo input BankMarketing.csv, corresponde a una institución financiera que busca entender los factores que influyen en la aceptación 
-      de sus campañas de marketing. Durante los últimos 6 meses, la efectividad (e = (Ventas/Base)×100%) cayó de 12% a 8%, afectando los bonos de 
-      los ejecutivos comerciales.
+      El archivo input BankMarketing.csv, corresponde a una institución financiera que busca entender los factores que influyen en la aceptación de 
+      sus campañas de marketing. Durante los últimos 6 meses, la efectividad (e = (Ventas/Base)×100%) cayó de 12% a 8%, afectando los bonos de los 
+      ejecutivos comerciales.
     </p>
     </section>
 
