@@ -110,8 +110,24 @@ else:
     except Exception as exc:
         st.error(f"No fue posible leer el archivo CSV: {exc}")
         st.stop()
-    
-    
+
+
+# -----------------------------------------------------------------------------
+# Navegación mediante Tabs 
+# -----------------------------------------------------------------------------
+    tabs = st.tabs(
+        [
+            "1. Información general del dataset",
+            "2. Clasificación de variables",
+            "3. Estadísticas descriptivas",
+            "4. Análisis de valores faltantes",
+            "6. Análisis de variables categóricas",
+            "7. Análisis bivariado (numérico vs categórico)",
+            "8. Análisis bivariado (categórico vs categórico)",
+            "9: Análisis basado en parámetros seleccionados",
+            "10:  Hallazgos clave"
+        ]
+    )
 
 
     
