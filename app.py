@@ -14,7 +14,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"  # "auto", "expanded" o "collapsed"
 )
 
-st.title("Proyecto Final - Caso de estudio #1")
+st.markdown('<h1 style="text-align:center;">Proyecto Final - Caso Nro. 1</h1>', unsafe_allow_html=True)
+
+#st.title("Proyecto Final - Caso de estudio #1")
 st.sidebar.title("Menú")
 
 
