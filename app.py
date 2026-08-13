@@ -51,7 +51,7 @@ if modulo == "Home":
     </ul>
     </section>
 
-    <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:15px; margin-top:12px;">
+    <section style="background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:10px; margin-top:12px;">
     <h3 style="margin-top:0;">Objetivo del análisis</h3>
     <p>
       Aplicar de forma integral los conceptos vistos a lo largo del curso, orientando el proyecto al Análisis Exploratorio de Datos (EDA) del dataset 
