@@ -121,6 +121,7 @@ else:
             "2. Clasificación de variables",
             "3. Estadísticas descriptivas",
             "4. Análisis de valores faltantes",
+            "5. Distribución de variables numéricas", 
             "6. Análisis de variables categóricas",
             "7. Análisis bivariado (numérico vs categórico)",
             "8. Análisis bivariado (categórico vs categórico)",
