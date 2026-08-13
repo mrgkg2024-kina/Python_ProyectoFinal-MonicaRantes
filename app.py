@@ -100,7 +100,7 @@ else:
             source_name = uploaded_file.name
             
             # Mostrar la vista previa en la app
-            st.subheader(f"Vista previa: {source_name}")
+            st.subheader(f"Vista previa del dataset: {source_name}")
             st.dataframe(raw_data.head())
             st.success(f"Dimensiones del dataset (filas, columnas) =  **{raw_data.shape}**")
         
