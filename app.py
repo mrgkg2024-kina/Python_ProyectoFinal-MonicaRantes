@@ -15,8 +15,6 @@ st.set_page_config(
 )
 
 st.markdown('<h1 style="text-align:center;">Proyecto Final - Caso Nro. 1</h1>', unsafe_allow_html=True)
-
-#st.title("Proyecto Final - Caso de estudio #1")
 st.sidebar.title("Menú")
 
 
@@ -123,7 +121,7 @@ else:
 # -----------------------------------------------------------------------------
     tabs = st.tabs(
         [
-            "1. Información general del dataset",
+            "Item 1",
             "2. Clasificación de variables",
             "3. Estadísticas descriptivas",
             "4. Análisis de valores faltantes",
@@ -136,6 +134,14 @@ else:
         ]
     )
 
+    with tabs[0]:
+        st.markdown('<h2 style="text-align:center;">Información general del dataset</h2>', unsafe_allow_html=True)
+        st.write("Se muestra una información general, los tipos de datos, así como el conteo de valores nulos")
+
+        col1, col2 = st.columns(2)
+            with col1:
+                 st.dataframe(raw_data.info())
+        
 
     
 
