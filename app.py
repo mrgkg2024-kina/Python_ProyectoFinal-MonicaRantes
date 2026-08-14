@@ -139,8 +139,8 @@ else:
         st.write("Se muestra una información general, los tipos de datos, así como el conteo de valores nulos")
 
         col1, col2 = st.columns(2)
-            with col1:
-                st.dataframe(raw_data.info())
+        with col1:
+            st.dataframe(raw_data.info())
         
 
     
