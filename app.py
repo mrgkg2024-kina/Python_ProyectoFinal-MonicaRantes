@@ -142,6 +142,7 @@ else:
 
         col1, col2 = st.columns(2)
         with col1:
+            st.markdown("Información general del dataset")
             buf = io.StringIO()
             df.info(buf=buf)
             s = buf.getvalue()
