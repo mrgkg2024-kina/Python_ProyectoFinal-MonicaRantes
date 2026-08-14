@@ -141,7 +141,14 @@ else:
 
         col1, col2 = st.columns(2)
         with col1:
-            st.dataframe(df.info())
+            info_df = pd.DataFrame({
+                "column": df.columns,
+                "dtype": df.dtypes.astype(str).values,
+                "non_null_count": df.count().values,
+                "null_count": df.isnull().sum().values,
+                "memory_bytes": df.memory_usage(deep=True).values
+            })
+            st.dataframe(info_df)
         
 
     
