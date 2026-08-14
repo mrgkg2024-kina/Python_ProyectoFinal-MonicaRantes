@@ -115,6 +115,7 @@ else:
         st.error(f"No fue posible leer el archivo CSV: {exc}")
         st.stop()
 
+    df = raw_data.copy()
 
 # -----------------------------------------------------------------------------
 # Navegación mediante Tabs 
@@ -140,7 +141,7 @@ else:
 
         col1, col2 = st.columns(2)
         with col1:
-            st.write(raw_data.info())
+            st.write(df.info())
         
 
     
