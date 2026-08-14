@@ -142,7 +142,7 @@ else:
 
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;">Resumen - DataFrame.info()</p>', unsafe_allow_html=True)
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;">Resumen del DataFrame .info()</p>', unsafe_allow_html=True)
             buf = io.StringIO()
             df.info(buf=buf)
             s = buf.getvalue()
