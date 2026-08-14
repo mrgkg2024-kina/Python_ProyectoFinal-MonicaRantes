@@ -143,12 +143,12 @@ else:
         with col1:
             mem = df.memory_usage(deep=True, index=False)
             info_df = pd.DataFrame({
-                "dtype": df.dtypes.astype(str),
-                "non_null_count": df.count(),
-                "null_count": df.isnull().sum(),
-                "memory_bytes": mem
+                "column": df.columns,
+                "non_null_count": df.count().values,
+                "dtype": df.dtypes.astype(str).values,
+                "memory_bytes": mem.values
             })
-            st.dataframe(info_df)
+            st.dataframe(info_df)  # interactivo
         
 
     
