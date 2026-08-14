@@ -145,7 +145,7 @@ else:
             buf = io.StringIO()
             df.info(buf=buf)
             s = buf.getvalue()
-            st.text(s)  # o st.text(s) / st.markdown(f"```text\n{s}\n```")
+            st.markdown(f"```text\n{s}\n```")  # o st.text(s) / st.markdown(f"```text\n{s}\n```")
         
 
     
