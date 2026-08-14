@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+import io
 
 import importlib.util 
 from io import BytesIO
@@ -141,14 +142,10 @@ else:
 
         col1, col2 = st.columns(2)
         with col1:
-            mem = df.memory_usage(deep=True, index=False)
-            info_df = pd.DataFrame({
-                "column": df.columns,
-                "non_null_count": df.count().values,
-                "dtype": df.dtypes.astype(str).values,
-                "memory_bytes": mem.values
-            })
-            st.dataframe(info_df)  # interactivo
+            buf = io.StringIO()
+            df.info(buf=buf)
+            s = buf.getvalue()
+            st.text(s)  # o st.text(s) / st.markdown(f"```text\n{s}\n```")
         
 
     
