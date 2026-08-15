@@ -175,10 +175,10 @@ else:
         columnas_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
         col1, col2 = st.columns(2)
         with col1:
-            st.subheader("Variables Numéricas")
-            st.dataframe(pd.DataFrame({"numéricas": columnas_numericas}))
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Numéricas</p>', unsafe_allow_html=True)
+            st.write(columnas_numericas)
         with col2:
-            st.subheader("Variables Categóricas")
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Categóricas</p>', unsafe_allow_html=True)
             st.write(columnas_categoricas)
 
 
