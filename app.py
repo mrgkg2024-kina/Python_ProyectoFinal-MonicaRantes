@@ -124,7 +124,7 @@ else:
     tabs = st.tabs(
         [
             "Item 1",
-            "2. Clasificación de variables",
+            "Item 2",
             "3. Estadísticas descriptivas",
             "4. Análisis de valores faltantes",
             "5. Distribución de variables numéricas", 
@@ -136,9 +136,13 @@ else:
         ]
     )
 
+# -----------------------------------------------------------------------------
+# Item 1 - Información general del dataset
+# -----------------------------------------------------------------------------
+    
     with tabs[0]:
         st.markdown('<h2 style="text-align:center;">Información general del dataset</h2>', unsafe_allow_html=True)
-        st.write("Se muestra una información general, los tipos de datos, así como el conteo de valores nulos")
+        st.write("Se muestra la información general, considerando los tipos de datos y el conteo de valores nulos.")
 
         col1, col2 = st.columns(2)
         with col1:
@@ -160,5 +164,20 @@ else:
                     )
             st.dataframe(styler)  # o st.write(styler)
 
-    
+# -----------------------------------------------------------------------------
+# Item 2 - Clasificación de variables
+# ----------------------------------------------------------------------------- 
+     with tabs[1]:
+         st.markdown('<h2 style="text-align:center;">Clasificación de variables</h2>', unsafe_allow_html=True)
+         st.write("Se identifica la variables numéricas y categóricas, uso de la funcion 
+                    los tipos de datos, así como el conteo de valores nulos")
 
+
+# -----------------------------------------------------------------------------
+# Item 3 - Estadísticas descriptivas
+# ----------------------------------------------------------------------------- 
+
+
+# -----------------------------------------------------------------------------
+# Item 4 - Análisis de valores faltantes
+# ----------------------------------------------------------------------------- 
