@@ -26,6 +26,17 @@ st.sidebar.title("Menú")
 def load_data_from_bytes(file_bytes: bytes) -> pd.DataFrame:
     return pd.read_csv(BytesIO(file_bytes), sep=';')
 
+def segmento_marital(df2: pd.DataFrame, column: str, estado:str) -> int:
+  counts = df2['marital'].value_counts(dropna=False)
+  if estado=="single":
+     return int(counts.get('single', 0))
+  elif estado=="married":
+    return int(counts.get('married', 0))
+  elif estado=="divorced":
+    return int(counts.get('divorced', 0))
+  else:
+    return int(counts.get('unknown', 0))
+
     
 # *********************************************
 # NAVEGACIÓN ENTRE LAS OPCIONES DEL MENU
@@ -180,7 +191,17 @@ else:
         with col2:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Categóricas</p>', unsafe_allow_html=True)
             st.write(columnas_categoricas)
+        with col3:
+            if st.session_state.clear_inputs:
+                st.session_state["estado_marital_key"] = "" 
+                st.session_state.clear_inputs = False
 
+            estado_marital = st.selectbox("Estado marital:", ["single", "married", "divorced", "unknown"], key="estado_marital_key")
+            total_registros= segmento_marital(df,"marital",estado_marital)
+            if st.button("Total de registros"):
+                st.write(f" Total de {estado marital}: {total_registros}")
+                 
+                 
 
 # -----------------------------------------------------------------------------
 # Item 3 - Estadísticas descriptivas
