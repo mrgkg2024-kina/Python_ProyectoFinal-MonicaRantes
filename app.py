@@ -170,7 +170,16 @@ else:
     with tabs[1]:
         st.markdown('<h2 style="text-align:center;">Clasificación de variables</h2>', unsafe_allow_html=True)
         st.write("""Se identifica la variables numéricas y categóricas, uso de la funcion xxxxxxxx , mostrando el 
-                    resultado correspondiente""")
+                    resultado correspondiente \n """)
+        columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
+        columnas_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
+        col1, col2 = st.columns(2)
+        with col1:
+            st.subheader("Variables Numéricas")
+            st.write(columnas_numericas)
+        with col2:
+            st.subheader("Variables Categóricas")
+            st.write(columnas_categoricas)
 
 
 # -----------------------------------------------------------------------------
