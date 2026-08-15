@@ -148,8 +148,8 @@ else:
             s = buf.getvalue()
             st.markdown(f"```text\n{s}\n```")  # o st.text(s) / st.markdown(f"```text\n{s}\n```")
         with col2:
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Conteo de valores nulos</p>', unsafe_allow_html=True)
-            st.dataframe(df.isna().sum().to_frame("null_count"), width=250)            
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; font-size:18px;"> Conteo de valores nulos</p>', unsafe_allow_html=True)
+            st.dataframe(df.isna().sum().to_frame("null_count"), width=300)            
         
 
     
