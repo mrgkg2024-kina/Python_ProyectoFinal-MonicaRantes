@@ -199,13 +199,13 @@ else:
                 st.session_state["estado_marital_key"] = "" 
                 st.session_state.clear_inputs = False
 
-            estado_marital = st.selectbox("Columna *marital:", ["single", "married", "divorced", "unknown"], key="estado_marital_key")
+            estado_marital = st.selectbox("Columna marital:", ["single", "married", "divorced", "unknown"], width=250, key="estado_marital_key")
             total_registros = segmento_marital(df,"marital",estado_marital)
             if st.button("Totales según selección"):
                 st.write(f" Total de registros tipo **{estado_marital}**: *{total_registros}*")
                 st.session_state.clear_inputs = True
             if st.button("Totales - Vista general"):
-                st.dataframe(df['marital'].value_counts(dropna=False), width=200)
+                st.dataframe(df['marital'].value_counts(dropna=False), width=250)
                  
                  
 
