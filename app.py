@@ -167,9 +167,9 @@ else:
 # -----------------------------------------------------------------------------
 # Item 2 - Clasificación de variables
 # ----------------------------------------------------------------------------- 
-     with tabs[1]:
-         st.markdown('<h2 style="text-align:center;">Clasificación de variables</h2>', unsafe_allow_html=True)
-         st.write("Se identifica la variables numéricas y categóricas, uso de la funcion 
+    with tabs[1]:
+        st.markdown('<h2 style="text-align:center;">Clasificación de variables</h2>', unsafe_allow_html=True)
+        st.write("Se identifica la variables numéricas y categóricas, uso de la funcion 
                     los tipos de datos, así como el conteo de valores nulos")
 
 
