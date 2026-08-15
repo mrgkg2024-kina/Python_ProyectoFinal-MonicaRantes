@@ -176,7 +176,7 @@ else:
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("Variables Numéricas")
-            st.write(columnas_numericas)
+            st.dataframe(pd.DataFrame({"numéricas": columnas_numericas}))
         with col2:
             st.subheader("Variables Categóricas")
             st.write(columnas_categoricas)
