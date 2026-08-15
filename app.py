@@ -202,6 +202,7 @@ else:
             total_registros = segmento_marital(df,"marital",estado_marital)
             if st.button("Sub-total por estado marital"):
                 st.write(f" Total de registros tipo {estado_marital}: {total_registros}")
+                st.session_state.clear_inputs = True
             if st.button("Total por estado marital"):
                 st.dataframe(df['marital'].value_counts(dropna=False))
                  
