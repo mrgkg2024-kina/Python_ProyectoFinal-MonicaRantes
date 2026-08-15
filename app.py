@@ -140,7 +140,7 @@ else:
         st.markdown('<h2 style="text-align:center;">Información general del dataset</h2>', unsafe_allow_html=True)
         st.write("Se muestra una información general, los tipos de datos, así como el conteo de valores nulos")
 
-        col1, col2,col3 = st.columns(3)
+        col1, col2 = st.columns(2)
         with col1:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> .info()</p>', unsafe_allow_html=True)
             buf = io.StringIO()
@@ -149,7 +149,7 @@ else:
             st.markdown(f"```text\n{s}\n```")  # o st.text(s) / st.markdown(f"```text\n{s}\n```")
         with col2:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Conteo de valores nulos</p>', unsafe_allow_html=True)
-            st.dataframe(df.isna().sum().to_frame("null_count"))            
+            st.dataframe(df.isna().sum().to_frame("null_count"), width=600)            
         
 
     
