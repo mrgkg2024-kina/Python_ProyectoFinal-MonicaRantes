@@ -205,7 +205,7 @@ else:
                 st.write(f" Total de registros tipo **{estado_marital}**: *{total_registros}*")
                 st.session_state.clear_inputs = True
             if st.button("Totales - Vista general"):
-                st.dataframe(df['marital'].value_counts(dropna=False))
+                st.dataframe(df['marital'].value_counts(dropna=False), width=200)
                  
                  
 
