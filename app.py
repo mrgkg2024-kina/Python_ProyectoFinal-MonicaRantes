@@ -173,7 +173,7 @@ else:
                     resultado correspondiente \n """)
         columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
         columnas_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
-        col1, col2 = st.columns(2)
+        col1, col2,col3 = st.columns(3)
         with col1:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Numéricas</p>', unsafe_allow_html=True)
             st.write(columnas_numericas)
