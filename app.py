@@ -180,7 +180,7 @@ else:
 # ----------------------------------------------------------------------------- 
     with tabs[1]:
         st.markdown('<h2 style="text-align:center;">Clasificación de variables</h2>', unsafe_allow_html=True)
-        st.write("""Se visualizan las variables numéricas y categóricas, así como el total de registros de la columna **marital**, clasificado por tipo,
+        st.write("""Se visualizan las variables numéricas y categóricas, así como el total de registros de la columna **marital**, clasificada por tipo,
         para lo cual se utiliza la función personalizada **segmento_marital**. También se puede elegir visualizar los totales de todos los tipos registrados
         en la columna **marital**.  \n """)
         columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
@@ -199,7 +199,7 @@ else:
                 st.session_state["estado_marital_key"] = "" 
                 st.session_state.clear_inputs = False
 
-            estado_marital = st.selectbox("Estado marital:", ["single", "married", "divorced", "unknown"], key="estado_marital_key")
+            estado_marital = st.selectbox("**Columna *marital**:", ["single", "married", "divorced", "unknown"], key="estado_marital_key")
             total_registros = segmento_marital(df,"marital",estado_marital)
             if st.button("Sub-total por estado marital"):
                 st.write(f" Total de registros tipo **{estado_marital}**: *{total_registros}*")
