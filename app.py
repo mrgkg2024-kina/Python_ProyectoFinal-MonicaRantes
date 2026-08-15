@@ -192,6 +192,8 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Categóricas</p>', unsafe_allow_html=True)
             st.write(columnas_categoricas)
         with col3:
+            st.session_state.setdefault("clear_inputs", False)
+            
             if st.session_state.clear_inputs:
                 st.session_state["estado_marital_key"] = "" 
                 st.session_state.clear_inputs = False
