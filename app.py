@@ -200,8 +200,10 @@ else:
 
             estado_marital = st.selectbox("Estado marital:", ["single", "married", "divorced", "unknown"], key="estado_marital_key")
             total_registros = segmento_marital(df,"marital",estado_marital)
-            if st.button("Total de registros"):
+            if st.button("ver totales x selección"):
                 st.write(f" Total de {estado_marital}: {total_registros}")
+            if st.button("ver todos"):
+                st.dataframe(df['marital'].value_counts(dropna=False))
                  
                  
 
