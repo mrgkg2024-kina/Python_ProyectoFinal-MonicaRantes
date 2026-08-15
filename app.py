@@ -180,8 +180,9 @@ else:
 # ----------------------------------------------------------------------------- 
     with tabs[1]:
         st.markdown('<h2 style="text-align:center;">Clasificación de variables</h2>', unsafe_allow_html=True)
-        st.write("""Se identifica la variables numéricas y categóricas, uso de la funcion xxxxxxxx , mostrando el 
-                    resultado correspondiente \n """)
+        st.write("""Se visualizan las variables numéricas y categóricas, así como el total de registros de la columna **marital**, clasificado por tipo,
+        para lo cual se utiliza la función personalizada **segmento_marital**. También se puede elegir visualizar los totales de todos los tipos registrados
+        en la columna **marital**.  \n """)
         columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
         columnas_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
         col1, col2,col3 = st.columns(3)
