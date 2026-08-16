@@ -187,10 +187,10 @@ else:
         columnas_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
         col1, col2,col3 = st.columns(3)
         with col1:
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Numéricas</p>', unsafe_allow_html=True)
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variables Numéricas</p>', unsafe_allow_html=True)
             st.write(columnas_numericas)
         with col2:
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variebles Categóricas</p>', unsafe_allow_html=True)
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variables Categóricas</p>', unsafe_allow_html=True)
             st.write(columnas_categoricas)
         with col3:
             st.session_state.setdefault("clear_inputs", False)
@@ -215,8 +215,16 @@ else:
     with tabs[2]:
         st.markdown('<h2 style="text-align:center;">Estadísticas descriptivas</h2>', unsafe_allow_html=True)
         st.write("""Interpretación básica de medias, medianas y dispersión.  \n """)
-        estadística_desc = df.describe()
-        st.dataframe(estadística_desc) 
+        
+        st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables numéricas</p>', unsafe_allow_html=True)
+        estadisticas_num = df.describe()
+        st.dataframe(estadisticas_num) 
+        
+        st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables categóricas</p>', unsafe_allow_html=True)
+        estadisticas_cat = df.describe(include=["object"])
+        st.dataframe(estadisticas_cat) 
+
+
 
 # -----------------------------------------------------------------------------
 # Item 4 - Análisis de valores faltantes
