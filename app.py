@@ -183,8 +183,10 @@ else:
         st.write("""Se visualizan las variables numéricas y categóricas, así como el total de registros de la columna **marital**, clasificada por tipo,
         para lo cual se utiliza la función personalizada **segmento_marital**. También se puede elegir visualizar los totales de todos los tipos registrados
         en la columna **marital**.  \n """)
+        
         columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
         columnas_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
+        
         col1, col2,col3 = st.columns(3)
         with col1:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Variables Numéricas</p>', unsafe_allow_html=True)
@@ -241,8 +243,8 @@ else:
                 disp = "Baja dispersión" if pd.notna(cv) and cv < 0.2 else ("Dispersión moderada" if pd.notna(cv) and cv < 0.5 else "Alta dispersión")
                 num_stats.append(f"- **{c}**: media={mean:.3f}, mediana={median:.3f}, std={std:.3f} → {skew}; {disp}")
             
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Interpretación — Variables numéricas
-                        </p>',unsafe_allow_html=True)     
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Interpretación — Variables numéricas</p>',
+                        unsafe_allow_html=True)     
             st.markdown("\n".join(num_stats))
 
         # Estadísticas de variables categóricas
