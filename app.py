@@ -246,7 +246,7 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Interpretación — Variables numéricas</p>',
                         unsafe_allow_html=True)     
             #st.markdown("\n".join(num_stats))
-            st.markdown(f'<small style="color:#2b8cbe;">{"<br>".join(num_stats)}</small>', unsafe_allow_html=True)
+            st.markdown(f'<small style="color:#000000;">{"<br>".join(num_stats)}</small>', unsafe_allow_html=True)
         
         # Estadísticas de variables categóricas
         colA, colB = st.columns(2)
