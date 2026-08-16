@@ -240,8 +240,9 @@ else:
                 skew = "≈ simétrica" if np.isclose(mean, median, atol=1e-8) else ("asimetría derecha" if mean>median else "asimetría izquierda")
                 disp = "Baja dispersión" if pd.notna(cv) and cv < 0.2 else ("Dispersión moderada" if pd.notna(cv) and cv < 0.5 else "Alta dispersión")
                 num_stats.append(f"- **{c}**: media={mean:.3f}, mediana={median:.3f}, std={std:.3f} → {skew}; {disp}")
-             
-            st.markdown("### Interpretación — Variables numéricas")
+            
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Interpretación — Variables numéricas
+                        </p>',unsafe_allow_html=True)     
             st.markdown("\n".join(num_stats))
 
         # Estadísticas de variables categóricas
