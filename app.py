@@ -216,7 +216,7 @@ else:
 # ----------------------------------------------------------------------------- 
     with tabs[2]:
         st.markdown('<h2 style="text-align:center;">Estadísticas descriptivas</h2>', unsafe_allow_html=True)
-       
+        st.write("")    
 
         # columnas
         num_cols = df.select_dtypes(include=["number"]).columns
