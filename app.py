@@ -245,7 +245,6 @@ else:
             
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Interpretación — Variables numéricas</p>',
                         unsafe_allow_html=True)     
-            #st.markdown("\n".join(num_stats))
             st.markdown(f'<small style="color:#000000;">{"<br>".join(num_stats)}</small>', unsafe_allow_html=True)
         
         # Estadísticas de variables categóricas
@@ -269,8 +268,8 @@ else:
                 nulls = int(df[c].isna().sum())
                 cat_stats.append(f"- **{c}**: top='{top}' ({top_count} / {total}, {pct:.1f}%), únicas={uniques}, nulos={nulls}")
             
-            st.markdown("### Interpretación — Variables categóricas")
-            #st.markdown("\n".join(cat_stats))
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Interpretación — Variables categóricas</p>',
+                        unsafe_allow_html=True)     
             st.markdown(f'<small style="color:#000000;">{"<br>".join(cat_stats)}</small>', unsafe_allow_html=True)
             
 # -----------------------------------------------------------------------------
