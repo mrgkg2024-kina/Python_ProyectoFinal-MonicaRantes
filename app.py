@@ -224,8 +224,45 @@ else:
         estadisticas_cat = df.describe(include=["object"])
         st.dataframe(estadisticas_cat) 
 
+        # columnas
+        num_cols = df.select_dtypes(include=["number"]).columns
+        cat_cols = df.select_dtypes(include=["object", "category", "string"]).columns
+
+        # Interpretación simple para numéricas
+        num_stats = []
+        for c in num_cols:
+            mean = df[c].mean()
+            median = df[c].median()
+            std = df[c].std()
+            cv = std / mean if mean not in (0, np.nan) else np.nan
+            skew = "≈ simétrica" if np.isclose(mean, median, atol=1e-8) else ("asimetría derecha" if mean>median else "asimetría izquierda")
+            disp = "Baja dispersión" if pd.notna(cv) and cv < 0.2 else ("Dispersión moderada" if pd.notna(cv) and cv < 0.5 else "Alta dispersión")
+            num_stats.append(f"- **{c}**: media={mean:.3f}, mediana={median:.3f}, std={std:.3f} → {skew}; {disp}")
 
 
+        # Interpretación simple para categóricas
+        cat_stats = []
+        for c in cat_cols:
+            vc = df[c].value_counts(dropna=False)
+            top = vc.index[0]
+            top_count = int(vc.iloc[0])
+            total = int(vc.sum())
+            pct = top_count / total * 100 if total>0 else 0
+            uniques = df[c].nunique(dropna=True)
+            nulls = int(df[c].isna().sum())
+            cat_stats.append(f"- **{c}**: top='{top}' ({top_count} / {total}, {pct:.1f}%), únicas={uniques}, nulos={nulls}")
+
+        # Mostrar en dos columnas (o usar expanders)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### Interpretación — Variables numéricas")
+            st.markdown("\n".join(num_stats))
+
+        with col2:
+            st.markdown("### Interpretación — Variables categóricas")
+            st.markdown("\n".join(cat_stats))
+
+            
 # -----------------------------------------------------------------------------
 # Item 4 - Análisis de valores faltantes
 # ----------------------------------------------------------------------------- 
