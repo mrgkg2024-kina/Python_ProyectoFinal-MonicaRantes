@@ -223,7 +223,7 @@ else:
         cat_cols = df.select_dtypes(include=["object", "category", "string"]).columns
 
         # Estadísticas de variables numéricas
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([1, 2])
         
         with col1:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables numéricas</p>', 
