@@ -136,7 +136,7 @@ else:
         [
             "Item 1",
             "Item 2",
-            "3. Estadísticas descriptivas",
+            "Item 3",
             "4. Análisis de valores faltantes",
             "5. Distribución de variables numéricas", 
             "6. Análisis de variables categóricas",
@@ -173,7 +173,7 @@ else:
                             {"selector": "th", "props": [("text-align", "center")]}
                         ])
                     )
-            st.dataframe(styler)  # o st.write(styler)
+            st.dataframe(styler) 
 
 # -----------------------------------------------------------------------------
 # Item 2 - Clasificación de variables
@@ -206,13 +206,17 @@ else:
                 st.session_state.clear_inputs = True
             if st.button("Totales - Vista general"):
                 st.dataframe(df['marital'].value_counts(dropna=False), width=250)
-                 
+               
                  
 
 # -----------------------------------------------------------------------------
 # Item 3 - Estadísticas descriptivas
 # ----------------------------------------------------------------------------- 
-
+    with tabs[2]:
+        st.markdown('<h2 style="text-align:center;">Estadísticas descriptivas</h2>', unsafe_allow_html=True)
+        st.write("""Interpretación básica de medias, medianas y dispersión.  \n """)
+        estadística_desc = df.describe()
+        st.dataframe(estadística_desc) 
 
 # -----------------------------------------------------------------------------
 # Item 4 - Análisis de valores faltantes
