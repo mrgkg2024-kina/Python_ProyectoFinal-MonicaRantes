@@ -216,13 +216,17 @@ else:
         st.markdown('<h2 style="text-align:center;">Estadísticas descriptivas</h2>', unsafe_allow_html=True)
         st.write("""Interpretación básica de medias, medianas y dispersión.  \n """)
         
-        st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables numéricas</p>', unsafe_allow_html=True)
-        estadisticas_num = df.describe()
-        st.dataframe(estadisticas_num) 
+        col1, col2 = st.columns(2)
         
-        st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables categóricas</p>', unsafe_allow_html=True)
-        estadisticas_cat = df.describe(include=["object"])
-        st.dataframe(estadisticas_cat) 
+        with col1:
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables numéricas</p>', unsafe_allow_html=True)
+            estadisticas_num = df.describe()
+            st.dataframe(estadisticas_num) 
+
+        with col2:
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables categóricas</p>', unsafe_allow_html=True)
+            estadisticas_cat = df.describe(include=["object"])
+            st.dataframe(estadisticas_cat) 
 
         # columnas
         num_cols = df.select_dtypes(include=["number"]).columns
@@ -252,13 +256,13 @@ else:
             nulls = int(df[c].isna().sum())
             cat_stats.append(f"- **{c}**: top='{top}' ({top_count} / {total}, {pct:.1f}%), únicas={uniques}, nulos={nulls}")
 
-        # Mostrar en dos columnas (o usar expanders)
-        col1, col2 = st.columns(2)
-        with col1:
+        # Mostrar en dos columnas 
+        colA, colB = st.columns(2)
+        with colA:
             st.markdown("### Interpretación — Variables numéricas")
             st.markdown("\n".join(num_stats))
 
-        with col2:
+        with colB:
             st.markdown("### Interpretación — Variables categóricas")
             st.markdown("\n".join(cat_stats))
 
