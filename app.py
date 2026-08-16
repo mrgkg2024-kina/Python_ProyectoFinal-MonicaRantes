@@ -229,7 +229,7 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold; text-align:center; font-size:18px;"> Estadísticas para variables numéricas</p>', 
                         unsafe_allow_html=True)
             estadisticas_num = df.describe()
-            st.dataframe(estadisticas_num, width=300) 
+            st.dataframe(estadisticas_num) 
 
         with col2:
            # Interpretación simple para numéricas
@@ -270,8 +270,8 @@ else:
                 cat_stats.append(f"- **{c}**: top='{top}' ({top_count} / {total}, {pct:.1f}%), únicas={uniques}, nulos={nulls}")
             
             st.markdown("### Interpretación — Variables categóricas")
-            st.markdown("\n".join(cat_stats))
-
+            #st.markdown("\n".join(cat_stats))
+            st.markdown(f'<small style="color:#000000;">{"<br>".join(cat_stats)}</small>', unsafe_allow_html=True)
             
 # -----------------------------------------------------------------------------
 # Item 4 - Análisis de valores faltantes
