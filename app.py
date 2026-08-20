@@ -294,10 +294,16 @@ else:
                     )
             st.dataframe(styler) 
         with col2:
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de strings vacíos</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de strings vacíos por columnas</p>', 
                             unsafe_allow_html=True)
             empty_str_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.eq('').sum()))
             st.dataframe(empty_str_counts) 
-        
+
+        with col3:
+             with col2:
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Conteo de strings con solo espacios (ejm. " ") </p>', 
+                            unsafe_allow_html=True)
+            spaces_only_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.str.strip().eq('').sum()))
+             st.dataframe(spaces_only_counts) 
 
         
