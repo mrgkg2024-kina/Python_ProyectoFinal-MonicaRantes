@@ -280,7 +280,7 @@ else:
         st.markdown('<h2 style="text-align:center;">Análisis de valores faltantes</h2>', unsafe_allow_html=True)
         st.write("")  
 
-        st.markdown("""El análisis no detectó valores nulos, cadenas vacías ni celdas que contengan solo espacios en las columnas examinadas. El dataset parece completo 
+        st.markdown("""El análisis no detectó valores nulos, cadenas vacías ni celdas que contengan solo espacios en las columnas examinadas. El dataset estaría completo 
                     según estas comprobaciones.""", unsafe_allow_html=True)
         
         col1, col2,col3 = st.columns(3)
