@@ -284,35 +284,50 @@ else:
         with col1:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de valores nulos</p>', 
                             unsafe_allow_html=True)
-            s = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
-            styler = (s.style
+            nulos = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
+
+            # convertir en DataFrame y renombrar la columna
+            df_nulos = nulos.rename("Conteo de nulos").reset_index()
+            df_nulos.columns = ["column", "Conteo de nulos"]  # index -> column, values -> Strings vacíos
+
+            
+            styler = (df_nulos.style
                         .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
-                        .set_properties(subset=["Valores nulos"], **{"width":"80px", "text-align":"center"})
+                        .set_properties(subset=["Conteo de nulos"], **{"width":"80px", "text-align":"center"})
                         .set_table_styles([
                         {"selector": "th", "props": [("text-align", "center")]}
                         ])
                     )
             st.dataframe(styler) 
+        
         with col2:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de strings vacíos por columnas</p>', 
                             unsafe_allow_html=True)
-            empty_str_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.eq('').sum()))
-           
-            styler2 = (empty_str_counts.style
-                        .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
-                        .set_properties(subset=["Strings vacíos"], **{"width":"80px", "text-align":"center"})
-                        .set_table_styles([
-                        {"selector": "th", "props": [("text-align", "center")]}
-                        ])
-                      ) 
-            st.dataframe(styler2) 
+ 
+            empty_str_counts = df.select_dtypes(include=['object']).apply(lambda col: col.eq('').sum())
+
+            # convertir en DataFrame y renombrar la columna
+            df_empty = empty_str_counts.rename("Strings vacíos").reset_index()
+            df_empty.columns = ["column", "Strings vacíos"]  # index -> column, values -> Strings vacíos
+
+            styler2 = (df_empty.style
+                       .set_properties(subset=["column"], **{"width": "220px", "text-align": "left"})
+                       .set_properties(subset=["Strings vacíos"], **{"width": "80px", "text-align": "center"})
+                       .set_table_styles([{"selector": "th", "props": [("text-align", "center")]}])
+                      )
+            st.dataframe(styler2)
 
         with col3:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Conteo de strings c/solo espacios (ejm. " ")</p>', 
                             unsafe_allow_html=True)
             spaces_only_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.str.strip().eq('').sum()))
 
-            styler3 = (spaces_only_counts.style
+            # convertir en DataFrame y renombrar la columna
+            df_spaces = spaces_only_counts.rename("Strings c/solo espacios").reset_index()
+            df_spaces.columns = ["column", "Strings c/solo espacios"]  # index -> column, values -> Strings vacíos
+
+            
+            styler3 = ( df_spaces.style
                         .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
                         .set_properties(subset=["Strings c/solo espacios"], **{"width":"80px", "text-align":"center"})
                         .set_table_styles([
