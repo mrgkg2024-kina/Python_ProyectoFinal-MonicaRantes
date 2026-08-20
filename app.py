@@ -286,11 +286,7 @@ else:
                             unsafe_allow_html=True)
             nulos = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
 
-            # convertir en DataFrame y renombrar la columna
-            df_nulos = nulos.rename("Conteo de nulos").reset_index()
-            df_nulos.columns = ["column", "Conteo de nulos"]  # index -> column, values -> Strings vacíos
-
-            
+            nulos.columns = ["column", "Conteo de nulos"]
             styler = (df_nulos.style
                         .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
                         .set_properties(subset=["Conteo de nulos"], **{"width":"80px", "text-align":"center"})
