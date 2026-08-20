@@ -304,6 +304,7 @@ else:
                         .set_table_styles([
                         {"selector": "th", "props": [("text-align", "center")]}
                         ])
+                      ) 
             st.dataframe(styler2) 
 
         with col3:
@@ -317,6 +318,7 @@ else:
                         .set_table_styles([
                         {"selector": "th", "props": [("text-align", "center")]}
                         ])
+                      )
             st.dataframe(styler3)         
             
         
