@@ -313,7 +313,7 @@ else:
 
             styler3 = (spaces_only_counts.style
                         .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
-                        .set_properties(subset=[Strings c/solo espacios"], **{"width":"80px", "text-align":"center"})
+                        .set_properties(subset=["Strings c/solo espacios"], **{"width":"80px", "text-align":"center"})
                         .set_table_styles([
                         {"selector": "th", "props": [("text-align", "center")]}
                         ])
