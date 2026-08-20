@@ -137,8 +137,8 @@ else:
             "Item 1",
             "Item 2",
             "Item 3",
-            "4. Análisis de valores faltantes",
-            "5. Distribución de variables numéricas", 
+            "Item 4",
+            "Item 5", 
             "6. Análisis de variables categóricas",
             "7. Análisis bivariado (numérico vs categórico)",
             "8. Análisis bivariado (categórico vs categórico)",
@@ -334,5 +334,10 @@ else:
                         ])
                       )
             st.dataframe(styler3)         
-            
-        
+
+# -----------------------------------------------------------------------------
+# Item 5 - Distribución de variables numéricas
+# ----------------------------------------------------------------------------- 
+        with tabs[4]:
+            st.markdown('<h2 style="text-align:center;">Distribución de variables numéricas</h2>', unsafe_allow_html=True)
+            st.write("")  
