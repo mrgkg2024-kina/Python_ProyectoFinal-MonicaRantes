@@ -285,9 +285,9 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de valores nulos</p>', 
                             unsafe_allow_html=True)
             nulos = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
-
             nulos.columns = ["column", "Conteo de nulos"]
-            styler = (df_nulos.style
+
+            styler = (nulos.style
                         .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
                         .set_properties(subset=["Conteo de nulos"], **{"width":"80px", "text-align":"center"})
                         .set_table_styles([
