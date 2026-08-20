@@ -279,18 +279,25 @@ else:
     with tabs[3]:
         st.markdown('<h2 style="text-align:center;">Análisis de valores faltantes</h2>', unsafe_allow_html=True)
         st.write("")  
-
-        st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de valores nulos</p>', 
-                        unsafe_allow_html=True)
-        s = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
-        styler = (s.style
-                    .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
-                    .set_properties(subset=["null_count"], **{"width":"80px", "text-align":"center"})
-                    .set_table_styles([
-                    {"selector": "th", "props": [("text-align", "center")]}
-                    ])
-                )
-        st.dataframe(styler) 
+        
+        col1, col2,col3 = st.columns(3)
+        with col1:
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de valores nulos</p>', 
+                            unsafe_allow_html=True)
+            s = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
+            styler = (s.style
+                        .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
+                        .set_properties(subset=["null_count"], **{"width":"80px", "text-align":"center"})
+                        .set_table_styles([
+                        {"selector": "th", "props": [("text-align", "center")]}
+                        ])
+                    )
+            st.dataframe(styler) 
+        with col2:
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de strings vacíos</p>', 
+                            unsafe_allow_html=True)
+            empty_str_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.eq('').sum()))
+            st.dataframe(empty_str_counts) 
         
 
         
