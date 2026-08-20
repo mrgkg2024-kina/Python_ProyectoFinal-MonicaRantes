@@ -319,12 +319,4 @@ else:
                         ])
             st.dataframe(styler3)         
             
-            
-            
-            
-            
-            
-            
-            st.dataframe(spaces_only_counts) 
-
         
