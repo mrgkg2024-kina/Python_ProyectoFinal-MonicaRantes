@@ -287,7 +287,7 @@ else:
             s = df.isna().sum().to_frame("null_count").reset_index().rename(columns={"index":"column"})
             styler = (s.style
                         .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
-                        .set_properties(subset=["null_count"], **{"width":"80px", "text-align":"center"})
+                        .set_properties(subset=["Valores nulos"], **{"width":"80px", "text-align":"center"})
                         .set_table_styles([
                         {"selector": "th", "props": [("text-align", "center")]}
                         ])
@@ -297,12 +297,34 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;"> Conteo de strings vacíos por columnas</p>', 
                             unsafe_allow_html=True)
             empty_str_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.eq('').sum()))
-            st.dataframe(empty_str_counts) 
+           
+            styler2 = (empty_str_counts.style
+                        .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
+                        .set_properties(subset=["Strings vacíos"], **{"width":"80px", "text-align":"center"})
+                        .set_table_styles([
+                        {"selector": "th", "props": [("text-align", "center")]}
+                        ])
+            st.dataframe(styler2) 
 
         with col3:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Conteo de strings c/solo espacios (ejm. " ")</p>', 
                             unsafe_allow_html=True)
             spaces_only_counts = (df.select_dtypes(include=['object']).apply(lambda col: col.str.strip().eq('').sum()))
+
+            styler3 = (spaces_only_counts.style
+                        .set_properties(subset=["column"], **{"width":"220px", "text-align":"left"})
+                        .set_properties(subset=[Strings c/solo espacios"], **{"width":"80px", "text-align":"center"})
+                        .set_table_styles([
+                        {"selector": "th", "props": [("text-align", "center")]}
+                        ])
+            st.dataframe(styler3)         
+            
+            
+            
+            
+            
+            
+            
             st.dataframe(spaces_only_counts) 
 
         
