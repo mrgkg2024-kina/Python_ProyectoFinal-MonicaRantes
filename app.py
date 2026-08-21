@@ -7,8 +7,9 @@ import pandas as pd
 import importlib.util 
 import io
 from io import BytesIO
-
 from textwrap import dedent
+
+import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title="Proyecto Final - Caso Nro. 1",
