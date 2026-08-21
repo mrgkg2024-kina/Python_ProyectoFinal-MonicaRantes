@@ -10,6 +10,7 @@ from io import BytesIO
 from textwrap import dedent
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 st.set_page_config(
     page_title="Proyecto Final - Caso Nro. 1",
