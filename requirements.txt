@@ -1,1 +1,1 @@
-matplotlib seaborn openpyxl pandas
+matplotlib seaborn
