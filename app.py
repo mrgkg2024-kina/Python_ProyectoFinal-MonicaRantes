@@ -343,10 +343,12 @@ else:
 # Item 5 - Distribución de variables numéricas
 # ----------------------------------------------------------------------------- 
         with tabs[4]:
+            st.markdown('<h2 style="text-align:center;">Distribución de variables numéricas</h2>', unsafe_allow_html=True)
+            st.write("")  
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Histogramas de las variables numéricas</p>', 
                             unsafe_allow_html=True)
             st.write("")  
-
+            
             # Seleccionar columnas numéricas
             num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
 
