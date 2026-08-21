@@ -143,7 +143,7 @@ else:
             "Item 3",
             "Item 4",
             "Item 5", 
-            "6. Análisis de variables categóricas",
+            "Item 6",
             "7. Análisis bivariado (numérico vs categórico)",
             "8. Análisis bivariado (categórico vs categórico)",
             "9: Análisis basado en parámetros seleccionados",
@@ -373,3 +373,10 @@ else:
                     ax.set_ylabel("Frecuencia")
                     ax.legend(fontsize=8)
                     st.pyplot(fig)
+
+# -----------------------------------------------------------------------------
+# Item 6 - Análisis de variables categóricas
+# ----------------------------------------------------------------------------- 
+        with tabs[5]:
+                    st.markdown('<h2 style="text-align:center;">Análisis de variables categóricas</h2>', unsafe_allow_html=True)
+                    st.write("")  
