@@ -348,11 +348,8 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Histogramas de las variables numéricas</p>', 
                             unsafe_allow_html=True)
             st.write("")  
-            
-            # Seleccionar columnas numéricas
+       
             num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-
-            st.markdown("### Histogramas de variables numéricas")
             sns.set(style="whitegrid")   
            
             color = "#2b8cbe"
