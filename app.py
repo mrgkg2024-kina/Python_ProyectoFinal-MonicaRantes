@@ -343,7 +343,8 @@ else:
 # Item 5 - Distribución de variables numéricas
 # ----------------------------------------------------------------------------- 
         with tabs[4]:
-            st.markdown('<h2 style="text-align:center;">Distribución de variables numéricas</h2>', unsafe_allow_html=True)
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Histogramas de las variables numéricas</p>', 
+                            unsafe_allow_html=True)
             st.write("")  
 
             # Seleccionar columnas numéricas
@@ -351,9 +352,9 @@ else:
 
             st.markdown("### Histogramas de variables numéricas")
             sns.set(style="whitegrid")   
-            # Parámetros simples
+           
             color = "#2b8cbe"
-            bins = 30  # puedes cambiar por 'auto' o un número distinto
+            bins = 30  
 
             # Mostrar histogramas en filas de 3
             cols_per_row = 3
