@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import io
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 import importlib.util 
 from io import BytesIO
@@ -341,3 +343,31 @@ else:
         with tabs[4]:
             st.markdown('<h2 style="text-align:center;">Distribución de variables numéricas</h2>', unsafe_allow_html=True)
             st.write("")  
+
+            # Seleccionar columnas numéricas
+            num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+
+            st.markdown("### Histogramas de variables numéricas")
+            sns.set(style="whitegrid")   
+            # Parámetros simples
+            color = "#2b8cbe"
+            bins = 30  # puedes cambiar por 'auto' o un número distinto
+
+            # Mostrar histogramas en filas de 3
+            cols_per_row = 3
+            for i, col in enumerate(num_cols):
+                if i % cols_per_row == 0:
+                    row = st.columns(cols_per_row)
+                with row[i % cols_per_row]:
+                    series = df[col].dropna()
+                    fig, ax = plt.subplots(figsize=(4, 3))
+                    # Histograma con color y borde
+                    sns.histplot(series, bins=bins, kde=False, color=color, edgecolor='k', ax=ax, alpha=0.8)
+                    # Líneas de media y mediana
+                    ax.axvline(series.mean(), color='red', linestyle='--', linewidth=1, label='media')
+                    ax.axvline(series.median(), color='green', linestyle='-.', linewidth=1, label='mediana')
+                    ax.set_title(col, fontsize=11)
+                    ax.set_xlabel("")
+                    ax.set_ylabel("Frecuencia")
+                    ax.legend(fontsize=8)
+                    st.pyplot(fig)
