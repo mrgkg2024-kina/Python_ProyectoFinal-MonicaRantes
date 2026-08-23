@@ -47,7 +47,7 @@ def obtener_var_categoricas(df3:pd.Dataframe) -> list:
 
 def crear_grafico_barras(df4, variable):
     # Reemplazar valores faltantes y calcular conteos
-    datos = df[variable].fillna("Valor faltante").astype(str)
+    datos = df4[variable].fillna("Valor faltante").astype(str)
     conteos = datos.value_counts()
 
     # Calcular proporciones
@@ -67,44 +67,71 @@ def crear_grafico_barras(df4, variable):
     barras = ax.bar(
         tabla["Categoría"],
         tabla["Conteo"],
-        width=0.65, 
+        width=0.65,
         color="steelblue",
         edgecolor="black",
-        linewidth=0.7, 
-        fontsize=7,   
-        padding=2
+        linewidth=0.7
     )
 
-    # Agregar conteo y porcentaje sobre cada barra
-    for barra, conteo, porcentaje in zip(
-        barras,
-        tabla["Conteo"],
-        tabla["Porcentaje"]
-    ):
-        ax.text(
-            barra.get_x() + barra.get_width() / 2,
-            barra.get_height(),
-            f"{conteo}\n({porcentaje:.1f}%)",
-            ha="center",
-            va="bottom",
-            fontsize=9
+    # Crear etiquetas con conteo y porcentaje
+    etiquetas = [
+        f"{conteo}\n({porcentaje:.1f}%)"
+        for conteo, porcentaje in zip(
+            tabla["Conteo"],
+            tabla["Porcentaje"]
         )
+    ]
+
+   # Agregar etiquetas sobre las barras
+    ax.bar_label(
+        barras,
+        labels=etiquetas,
+        padding=2,
+        fontsize=7
+    )
 
     # Personalizar el gráfico
-    ax.set_title(f"Distribución de la variable: {variable}")
-    ax.set_xlabel(variable)
-    ax.set_ylabel("Conteo")
-    ax.tick_params(axis="x", rotation=45)
-    ax.grid(axis="y", linestyle="--", alpha=0.4)
+    ax.set_title(
+        f"Distribución de la variable: {variable}",
+        fontsize=10,
+        fontweight="bold"
+    )
+    ax.set_xlabel(variable, fontsize=8)
+    ax.set_ylabel("Conteo", fontsize=8)
+
+    ax.tick_params(
+        axis="x",
+        rotation=45,
+        labelsize=7
+    )
+    ax.tick_params(
+        axis="y",
+        labelsize=7
+    )
+
+    ax.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4
+    )
+
+    # Enviar la cuadrícula detrás de las barras
+    ax.set_axisbelow(True)
+
+    # Ocultar bordes superior y derecho
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
 
     # Evitar que las etiquetas queden cortadas
-    if len(tabla) > 0:
-        ax.set_ylim(0, tabla["Conteo"].max() * 1.18)
+    if not tabla.empty:
+        ax.set_ylim(
+            0,
+            tabla["Conteo"].max() * 1.25
+        )
 
     fig.tight_layout()
+
     return tabla, fig
-
-
 
 
     
