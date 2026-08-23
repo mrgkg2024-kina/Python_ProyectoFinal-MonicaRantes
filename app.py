@@ -736,7 +736,7 @@ else:
                 annot_kws={"fontsize": 7}, 
                 fmt=".1f",
                 cmap="YlGnBu",
-                linewidths=0.5,
+                linewidths=0.4,
                 linecolor="white",
                 cbar_kws={"label": "Porcentaje (%)","shrink": 0.75 },
                 ax=ax
@@ -752,8 +752,8 @@ else:
             ax.set_xlabel(etiqueta_x, fontsize=8, labelpad=5)
             ax.set_ylabel("Tipo de trabajo", fontsize=8, labelpad=5)
     
-            ax.tick_params(axis="x", rotation=45)
-            ax.tick_params(axis="y", rotation=0)
+            ax.tick_params(axis="x", labelsize=7, rotation=45)
+            ax.tick_params(axis="y", labelsize=7, rotation=0)
     
             plt.tight_layout()
     
