@@ -733,6 +733,7 @@ else:
             sns.heatmap(
                 tabla_porcentajes,
                 annot=True,
+                annot_kws={"fontsize": 7}, 
                 fmt=".1f",
                 cmap="YlGnBu",
                 linewidths=0.5,
