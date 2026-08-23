@@ -548,7 +548,7 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[6]:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (numérico vs categórico)</h2>', unsafe_allow_html=True)
-            st.markdown("""Se consideran para el análisis la variable numérica **age (edad)** y la variable categórica **job (trabajo) **. Se muestra un breve análisis 
+            st.markdown("""Para el análisis tenemos: la variable numérica **age (edad)** y la variable categórica **job (trabajo)**. Se muestra un breve análisis 
                     estadístico de ambas variables, así como el gráfico comparativo asociado. Finalmente se da un breve resumen del análisis bajo la etiqueta de 
                     **Interpretación**.""", unsafe_allow_html=True)
             
