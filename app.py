@@ -449,13 +449,11 @@ else:
             variables_categoricas = obtener_var_categoricas(df)
 
             if variables_categoricas:
-                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Variables categóricas</p>', 
-                            unsafe_allow_html=True)
                 texto_variables = " | ".join(variables_categoricas)
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #f0f2f6;
+                        background-color: #2b8cbe;
                         padding: 12px;
                         border-radius: 8px;
                         border-left: 5px solid #1f77b4;
@@ -464,10 +462,6 @@ else:
                         <strong>Variables categóricas ({len(variables_categoricas)}):</strong>
                         <span>{texto_variables}</span>
                     </div>""", unsafe_allow_html=True)    
-
-
-                
-                st.write(variables_categoricas)
 
                 # Elegir cómo mostrar los resultados
                 opcion = st.radio(
