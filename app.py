@@ -563,71 +563,74 @@ else:
                 st.warning("No existen datos válidos en las columnas age y job.")
                 st.stop()
 
-            # Resumen estadístico por tipo de trabajo
-            resumen = (
-                datos.groupby("job")["age"]
-                .agg(
-                    cantidad="count",
-                    edad_promedio="mean",
-                    edad_mediana="median",
-                    edad_minima="min",
-                    edad_maxima="max"
+            col1, col2 = st.columns(2)
+            with col1:
+                # Resumen estadístico por tipo de trabajo
+                resumen = (
+                    datos.groupby("job")["age"]
+                    .agg(
+                        cantidad="count",
+                        edad_promedio="mean",
+                        edad_mediana="median",
+                        edad_minima="min",
+                        edad_maxima="max"
+                    )
+                    .sort_values("edad_promedio", ascending=True)
+                    .round(1)
                 )
-                .sort_values("edad_promedio", ascending=True)
-                .round(1)
-            )
-
-            st.subheader("Resumen estadístico")
     
-            st.dataframe(
-                resumen,
-                use_container_width=True
-            )
+                st.subheader("Resumen estadístico")
+        
+                st.dataframe(
+                    resumen,
+                    use_container_width=True
+                )
 
-            # Crear gráfico horizontal
-            fig, ax = plt.subplots(figsize=(9, 6))
+            with col2:
+                # Crear gráfico horizontal
+                fig, ax = plt.subplots(figsize=(9, 6))
+        
+                barras = ax.barh(
+                    resumen.index.astype(str),
+                    resumen["edad_promedio"],
+                    color="#4682B4",
+                    edgecolor="black",
+                    linewidth=0.6
+                )
     
-            barras = ax.barh(
-                resumen.index.astype(str),
-                resumen["edad_promedio"],
-                color="#4682B4",
-                edgecolor="black",
-                linewidth=0.6
-            )
-
-            # Mostrar edad promedio al final de cada barra
-            ax.bar_label(
-                barras,
-                labels=[
-                    f"{edad:.1f} años"
-                    for edad in resumen["edad_promedio"]
-                ],
-                padding=3,
-                fontsize=9
-            )
-
-            ax.set_title("Edad promedio de los clientes según su tipo de trabajo")
-            ax.set_xlabel("Edad promedio")
-            ax.set_ylabel("Tipo de trabajo")
-
-            ax.grid(axis="x", linestyle="--", alpha=0.3)
-
-            ax.spines["top"].set_visible(False)
-            ax.spines["right"].set_visible(False)
-
-            # Agregar espacio para las etiquetas
-            edad_maxima = resumen["edad_promedio"].max()
-
-            if edad_maxima > 0:
-                ax.set_xlim(0, edad_maxima * 1.20)
-
-            plt.tight_layout()
+                # Mostrar edad promedio al final de cada barra
+                ax.bar_label(
+                    barras,
+                    labels=[
+                        f"{edad:.1f} años"
+                        for edad in resumen["edad_promedio"]
+                    ],
+                    padding=3,
+                    fontsize=9
+                )
     
-            st.subheader("Gráfico comparativo")
+                ax.set_title("Edad promedio de los clientes según su tipo de trabajo")
+                ax.set_xlabel("Edad promedio")
+                ax.set_ylabel("Tipo de trabajo")
     
-            st.pyplot(fig, use_container_width=False)
-
-            plt.close(fig)
+                ax.grid(axis="x", linestyle="--", alpha=0.3)
+    
+                ax.spines["top"].set_visible(False)
+                ax.spines["right"].set_visible(False)
+    
+                # Agregar espacio para las etiquetas
+                edad_maxima = resumen["edad_promedio"].max()
+    
+                if edad_maxima > 0:
+                    ax.set_xlim(0, edad_maxima * 1.20)
+    
+                plt.tight_layout()
+        
+                st.subheader("Gráfico comparativo")
+        
+                st.pyplot(fig, use_container_width=False)
+    
+                plt.close(fig)
 
             # Interpretación automática
             trabajo_mayor = resumen["edad_promedio"].idxmax()
