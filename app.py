@@ -236,7 +236,7 @@ else:
             "Item 5", 
             "Item 6",
             "Item 7",
-            "8. Análisis bivariado (categórico vs categórico)",
+            "Item 8",
             "9: Análisis basado en parámetros seleccionados",
             "10:  Hallazgos clave"
         ]
@@ -648,9 +648,12 @@ else:
             st.write(f"- El grupo con trabajo **{trabajo_menor}** presenta la edad promedio más baja: **{promedio_menor:.1f} años**.")
             st.write(f"- La diferencia entre ambas edades promedio es de **{diferencia:.1f} años**.")
     
-
-                
-    
+# -----------------------------------------------------------------------------
+# Item 8 - Análisis bivariado (categórico vs categórico) 
+# ----------------------------------------------------------------------------- 
+        with tabs[7]:
+            st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)                
+  
 
 
 
