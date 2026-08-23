@@ -776,31 +776,31 @@ else:
 
             elif variable_2 == "education":
                 st.write("Nivel educativo más frecuente dentro de cada tipo de trabajo:")
-
                 interpretaciones = []
-                    for trabajo in tabla_porcentajes.index:
-                        educacion_principal = (tabla_porcentajes.loc[trabajo].idxmax())
-                        porcentaje_principal = tabla_porcentajes.loc[trabajo, educacion_principal]
-                        cantidad_principal = tabla_frecuencias.loc[trabajo, educacion_principal]
+                                
+                for trabajo in tabla_porcentajes.index:
+                    educacion_principal = (tabla_porcentajes.loc[trabajo].idxmax())
+                    porcentaje_principal = tabla_porcentajes.loc[trabajo, educacion_principal]
+                    cantidad_principal = tabla_frecuencias.loc[trabajo, educacion_principal]
 
-                        interpretaciones.append({
-                            "Trabajo": trabajo,
-                            "Educación más frecuente": educacion_principal,
-                            "Cantidad": int(cantidad_principal),
-                            "Porcentaje": f"{porcentaje_principal:.2f} %"
-                        })
+                    interpretaciones.append({
+                        "Trabajo": trabajo,
+                        "Educación más frecuente": educacion_principal,
+                        "Cantidad": int(cantidad_principal),
+                        "Porcentaje": f"{porcentaje_principal:.2f} %"
+                    })
     
-                    tabla_interpretacion = pd.DataFrame(interpretaciones)
-                    st.dataframe(tabla_interpretacion, hide_index=True, use_container_width=True)
+                tabla_interpretacion = pd.DataFrame(interpretaciones)
+                st.dataframe(tabla_interpretacion, hide_index=True, use_container_width=True)
 
-                    # Interpretación general
-                    combinacion_mayor = tabla_porcentajes.stack().idxmax()
-                    porcentaje_combinacion = tabla_porcentajes.stack().max()
+                # Interpretación general
+                combinacion_mayor = tabla_porcentajes.stack().idxmax()
+                porcentaje_combinacion = tabla_porcentajes.stack().max()
         
-                    trabajo_destacado, educacion_destacada = combinacion_mayor
+                trabajo_destacado, educacion_destacada = combinacion_mayor
         
-                    st.success(f"La concentración porcentual más alta se encuentra en el trabajo **{trabajo_destacado}**, donde el nivel "
-                        f"educativo predominante es **{educacion_destacada}**, con **{porcentaje_combinacion:.2f} %**.")
+                st.success(f"La concentración porcentual más alta se encuentra en el trabajo **{trabajo_destacado}**, donde el nivel "
+                    f"educativo predominante es **{educacion_destacada}**, con **{porcentaje_combinacion:.2f} %**.")
 
 
 
