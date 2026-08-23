@@ -41,7 +41,7 @@ def segmento_marital(df2: pd.DataFrame, column: str, estado:str) -> int:
   else:
     return int(counts.get('unknown', 0))
 
-def obtener_var_categoricas(df3:pd:Dataframe) -> list:
+def obtener_var_categoricas(df3:pd.Dataframe) -> list:
     return df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
 
 
