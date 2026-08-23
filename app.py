@@ -653,7 +653,7 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[7]:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)    
-            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones: **y(respuesta a la campaña) ** y 
+            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones: ** y (respuesta a la campaña)** y 
                     **education (nivel educativo)**. Se muestra un resumen estadístico de la primera y segunda variable elegida, así como el mapa de calor. Finalmente 
                     se da una breve interpretación del gráfico.""", unsafe_allow_html=True)
             st.write("")  
@@ -692,18 +692,21 @@ else:
             # ------------------------------------------
             # 5. Mostrar tablas
             # ------------------------------------------
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Resumen estadístico</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:20px;">Resumen estadístico</p>', 
                             unsafe_allow_html=True)   
-            #st.subheader("Resumen estadístico")
-    
+              
             columna_1, columna_2 = st.columns(2)
 
             with columna_1:
-                st.markdown("**Tabla de frecuencias absolutas**")
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Tabla de frecuencias</p>', 
+                            unsafe_allow_html=True)   
+                #st.markdown("**Tabla de frecuencias absolutas**")
                 st.dataframe(tabla_frecuencias_total, use_container_width=True)
 
             with columna_2:
-                st.markdown("**Tabla de porcentajes por trabajo**")
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">TTabla de porcentajes por trabajo</p>', 
+                            unsafe_allow_html=True)   
+                #st.markdown("**Tabla de porcentajes por trabajo**")
                 st.caption("Cada fila representa un trabajo y suma 100 %.")
     
                 # Agregar el símbolo % para presentación
@@ -714,10 +717,10 @@ else:
             # ------------------------------------------
             # 6. Mapa de calor
             # ------------------------------------------
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Mapa de calor</p>', 
+            st.write("")  
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:20px;">Mapa de calor</p>', 
                             unsafe_allow_html=True)   
-            #st.subheader("Mapa de calor")
-    
+               
             if variable_2 == "y":
                 titulo = "Respuesta a la campaña según el tipo de trabajo"
                 etiqueta_x = "Respuesta a la campaña"
@@ -727,7 +730,7 @@ else:
     
             sns.set_theme(style="white")
             alto = max(5, len(tabla_porcentajes.index) * 0.55)
-            fig, ax = plt.subplots(figsize=(10, alto))
+            fig, ax = plt.subplots(figsize=(8, alto))
 
             sns.heatmap(
                 tabla_porcentajes,
@@ -742,7 +745,7 @@ else:
 
             ax.set_title(
                 titulo,
-                fontsize=13,
+                fontsize=10,
                 fontweight="bold"
             )
 
@@ -760,7 +763,8 @@ else:
             # ------------------------------------------
             # 7. Interpretación automática
             # ------------------------------------------
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Interpretación</p>', 
+            st.write("")  
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:20px;">Interpretación</p>', 
                             unsafe_allow_html=True)   
             #st.subheader("Interpretación automática")
     
