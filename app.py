@@ -288,8 +288,9 @@ else:
 
         # columnas
         num_cols = df.select_dtypes(include=["number"]).columns
-        cat_cols = df.select_dtypes(include=["object", "category", "string"]).columns
-
+        #cat_cols = df.select_dtypes(include=["object", "category", "string"]).columns
+        cat_cols = obtener_var_categoricas(df)
+        
         # Estadísticas de variables numéricas
         col1, col2 = st.columns(2)
         
@@ -445,7 +446,7 @@ else:
             st.write("")  
 
             # Identificar variables categóricas
-            variables_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
+            variables_categoricas = obtener_var_categoricas(df)
 
             if variables_categoricas:
 
