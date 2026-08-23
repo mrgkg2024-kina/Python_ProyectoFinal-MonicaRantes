@@ -253,7 +253,7 @@ else:
         en la columna **marital**.  \n """)
         
         columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
-        columnas_categoricas = def obtener_var_categoricas(df) 
+        columnas_categoricas = obtener_var_categoricas(df) 
         
         col1, col2,col3 = st.columns(3)
         with col1:
