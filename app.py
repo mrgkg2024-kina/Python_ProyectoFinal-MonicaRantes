@@ -41,7 +41,11 @@ def segmento_marital(df2: pd.DataFrame, column: str, estado:str) -> int:
   else:
     return int(counts.get('unknown', 0))
 
-def crear_grafico_barras(df3, variable):
+def obtener_var_categoricas(df3:pd:Dataframe) -> list:
+    return df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
+
+
+def crear_grafico_barras(df4, variable):
     # Reemplazar valores faltantes y calcular conteos
     datos = df[variable].fillna("Valor faltante").astype(str)
     conteos = datos.value_counts()
