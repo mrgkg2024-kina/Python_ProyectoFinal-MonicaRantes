@@ -62,7 +62,7 @@ def crear_grafico_barras(df4, variable):
     })
 
     # Crear gráfico
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(8, 4))
 
     barras = ax.bar(
         tabla["Categoría"],
@@ -98,7 +98,6 @@ def crear_grafico_barras(df4, variable):
         ax.set_ylim(0, tabla["Conteo"].max() * 1.18)
 
     fig.tight_layout()
-
     return tabla, fig
 
 
