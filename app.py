@@ -458,6 +458,7 @@ else:
                         border-radius: 8px;
                         border: 2px solid #2b8cbe;
                         color: #2b8cbe;
+                        text-align: center;
                     ">
                         <strong>Variables categóricas ({len(variables_categoricas)}):</strong>
                         <span>{texto_variables}</span>
