@@ -548,6 +548,10 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[6]:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (numérico vs categórico)</h2>', unsafe_allow_html=True)
+            st.markdown("""Se consideran para el análisis la variable numérica **age (edad)** y la variable categórica **job (trabajo) **. Se muestra un breve análisis 
+                    estadístico de ambas variables, así como el gráfico comparativo asociado. Finalmente se da un breve resumen del análisis bajo la etiqueta de 
+                    **Interpretación**.""", unsafe_allow_html=True)
+            
             st.write("")  
 
             # Preparar los datos
@@ -565,7 +569,7 @@ else:
 
             col1, col2 = st.columns([1,2])
             with col1:
-                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Resumen estadístico (ejm. " ")</p>', 
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Resumen estadístico</p>', 
                             unsafe_allow_html=True)   
                 
                 # Resumen estadístico por tipo de trabajo
@@ -588,7 +592,7 @@ else:
                 )
 
             with col2:
-                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Gráfico comparativo (ejm. " ")</p>', 
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Gráfico comparativo</p>', 
                             unsafe_allow_html=True)   
                 # Crear gráfico horizontal
                 fig, ax = plt.subplots(figsize=(9, 6))
@@ -633,7 +637,7 @@ else:
     
                 plt.close(fig)
 
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Interpretación (ejm. " ")</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Interpretación</p>', 
                             unsafe_allow_html=True)   
             
             trabajo_mayor = resumen["edad_promedio"].idxmax()
