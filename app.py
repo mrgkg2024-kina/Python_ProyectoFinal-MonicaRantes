@@ -451,7 +451,22 @@ else:
             if variables_categoricas:
                 st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Variables categóricas</p>', 
                             unsafe_allow_html=True)
-                st.markdown("**Variables categóricas:** " + " | ".join(variables_categoricas))  # validar
+                texto_variables = " | ".join(variables_categoricas)
+                st.markdown(
+                    f"""
+                    <div style="
+                        background-color: #f0f2f6;
+                        padding: 12px;
+                        border-radius: 8px;
+                        border-left: 5px solid #1f77b4;
+                        color: #262730;
+                    ">
+                        <strong>Variables categóricas ({len(variables_categoricas)}):</strong>
+                        <span>{texto_variables}</span>
+                    </div>""", unsafe_allow_html=True)    
+
+
+                
                 st.write(variables_categoricas)
 
                 # Elegir cómo mostrar los resultados
