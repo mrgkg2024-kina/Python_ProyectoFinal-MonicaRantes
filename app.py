@@ -637,7 +637,7 @@ else:
     
                 plt.close(fig)
 
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Interpretación</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Interpretación</p>', 
                             unsafe_allow_html=True)   
             
             trabajo_mayor = resumen["edad_promedio"].idxmax()
@@ -648,11 +648,7 @@ else:
 
             diferencia = promedio_mayor - promedio_menor
 
-            st.write(
-                f"El grupo de clientes con trabajo **{trabajo_mayor}** "
-                f"presenta la edad promedio más alta: "
-                f"**{promedio_mayor:.1f} años**."
-            )
+            st.write(f"- El grupo de clientes con trabajo **{trabajo_mayor}** presenta la edad promedio más alta: **{promedio_mayor:.1f} años**.")
     
             st.write(
                 f"El grupo con trabajo **{trabajo_menor}** presenta la "
