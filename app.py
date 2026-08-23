@@ -62,7 +62,7 @@ def crear_grafico_barras(df4, variable):
     })
 
     # Crear gráfico
-    fig, ax = plt.subplots(figsize=(6,3.5))
+    fig, ax = plt.subplots(figsize=(6,3))
 
     barras = ax.bar(
         tabla["Categoría"],
@@ -87,13 +87,13 @@ def crear_grafico_barras(df4, variable):
         barras,
         labels=etiquetas,
         padding=2,
-        fontsize=7
+        fontsize=6
     )
 
     # Personalizar el gráfico
     ax.set_title(
         f"Distribución de la variable: {variable}",
-        fontsize=10,
+        fontsize=8,
         fontweight="bold"
     )
     ax.set_xlabel(variable, fontsize=8)
@@ -102,11 +102,11 @@ def crear_grafico_barras(df4, variable):
     ax.tick_params(
         axis="x",
         rotation=45,
-        labelsize=7
+        labelsize=6
     )
     ax.tick_params(
         axis="y",
-        labelsize=7
+        labelsize=6
     )
 
     ax.grid(
