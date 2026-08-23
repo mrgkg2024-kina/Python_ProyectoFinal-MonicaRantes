@@ -463,7 +463,8 @@ else:
                         <strong>Variables categóricas ({len(variables_categoricas)}):</strong>
                         <span>{texto_variables}</span>
                     </div>""", unsafe_allow_html=True)    
-
+                st.write("")  
+                
                 # Elegir cómo mostrar los resultados
                 opcion = st.radio(
                     "Selecciona una opción:",
