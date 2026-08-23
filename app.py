@@ -237,7 +237,7 @@ else:
             "Item 4",
             "Item 5", 
             "Item 6",
-            "7. Análisis bivariado (numérico vs categórico)",
+            "Item 7",
             "8. Análisis bivariado (categórico vs categórico)",
             "9: Análisis basado en parámetros seleccionados",
             "10:  Hallazgos clave"
@@ -544,6 +544,13 @@ else:
             else:
                 st.warning("El archivo no contiene variables categóricas.")    
             
+
+# -----------------------------------------------------------------------------
+# Item 7 - Análisis bivariado (numérico vs categórico)
+# ----------------------------------------------------------------------------- 
+        with tabs[6]:
+            st.markdown('<h2 style="text-align:center;">Análisis bivariado (numérico vs categórico)</h2>', unsafe_allow_html=True)
+            st.write("")  
 
 
 
