@@ -621,7 +621,7 @@ else:
             edad_maxima = resumen["edad_promedio"].max()
 
             if edad_maxima > 0:
-            ax.set_xlim(0, edad_maxima * 1.20)
+                ax.set_xlim(0, edad_maxima * 1.20)
 
             plt.tight_layout()
     
