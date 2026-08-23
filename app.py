@@ -237,8 +237,8 @@ else:
             "Item 6",
             "Item 7",
             "Item 8",
-            "9: Análisis basado en parámetros seleccionados",
-            "10:  Hallazgos clave"
+            "Item 9",
+            "Item 10"
         ]
     )
 
@@ -654,11 +654,181 @@ else:
         with tabs[7]:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)                
   
+            # ------------------------------------------
+            # 2. Selección de variables
+            # ------------------------------------------
+            variable_1 = "job"
+            variable_2 = st.selectbox("Seleccione la segunda variable:", options=["y", "education"])
+
+            columnas_requeridas = [variable_1, variable_2]
+
+            # ------------------------------------------
+            # 3. Preparar los datos
+            # ------------------------------------------
+            datos = df[[variable_1, variable_2]].dropna().copy()
+            datos[variable_1] = (datos[variable_1].astype(str).str.strip().str.lower())
+            datos[variable_2] = (datos[variable_2].astype(str).str.strip().str.lower())
+
+            if datos.empty:
+                st.warning("No existen registros válidos para realizar el análisis.")
+                st.stop()
+
+            st.info(f"Se analizaron **{len(datos):,} registros válidos**.")
+
+            # ------------------------------------------
+            # 4. Tablas de contingencia
+            # ------------------------------------------
+            tabla_frecuencias = pd.crosstab(datos[variable_1], datos[variable_2])
+            tabla_frecuencias_total = pd.crosstab(datos[variable_1], datos[variable_2], margins=True, margins_name="Total")
+    
+            # Los porcentajes de cada fila suman 100 %
+            tabla_porcentajes = pd.crosstab(datos[variable_1], datos[variable_2], normalize="index").mul(100).round(2)
+
+            # ------------------------------------------
+            # 5. Mostrar tablas
+            # ------------------------------------------
+            st.subheader("Resumen estadístico")
+    
+            columna_1, columna_2 = st.columns(2)
+
+            with columna_1:
+                st.markdown("**Tabla de frecuencias absolutas**")
+                st.dataframe(tabla_frecuencias_total, use_container_width=True)
+
+            with columna_2:
+                st.markdown("**Tabla de porcentajes por trabajo**")
+                st.caption("Cada fila representa un trabajo y suma 100 %.")
+    
+                # Agregar el símbolo % para presentación
+                tabla_porcentajes_mostrar = (tabla_porcentajes.astype(str) + " %")
+    
+                st.dataframe(tabla_porcentajes_mostrar, use_container_width=True)
+
+            # ------------------------------------------
+            # 6. Mapa de calor
+            # ------------------------------------------
+            st.subheader("Mapa de calor")
+    
+            if variable_2 == "y":
+                titulo = "Respuesta a la campaña según el tipo de trabajo"
+                etiqueta_x = "Respuesta a la campaña"
+            else:
+                titulo = "Nivel educativo según el tipo de trabajo"
+                etiqueta_x = "Nivel educativo"
+    
+            sns.set_theme(style="white")
+            alto = max(5, len(tabla_porcentajes.index) * 0.55)
+            fig, ax = plt.subplots(figsize=(10, alto))
+
+            sns.heatmap(
+                tabla_porcentajes,
+                annot=True,
+                fmt=".1f",
+                cmap="YlGnBu",
+                linewidths=0.5,
+                linecolor="white",
+                cbar_kws={"label": "Porcentaje (%)"},
+                ax=ax
+            )
+
+            ax.set_title(
+                titulo,
+                fontsize=13,
+                fontweight="bold"
+            )
+
+            ax.set_xlabel(etiqueta_x)
+            ax.set_ylabel("Tipo de trabajo")
+    
+            ax.tick_params(axis="x", rotation=45)
+            ax.tick_params(axis="y", rotation=0)
+    
+            plt.tight_layout()
+    
+            st.pyplot(fig, use_container_width=False)
+            plt.close(fig)
+
+            # ------------------------------------------
+            # 7. Interpretación automática
+            # ------------------------------------------
+            st.subheader("Interpretación automática")
+    
+            if variable_2 == "y":
+                # Verificar que exista la categoría "yes"
+                if "yes" in tabla_porcentajes.columns:
+       
+                    porcentajes_yes = tabla_porcentajes["yes"]
+                    trabajo_mayor = porcentajes_yes.idxmax()
+                    trabajo_menor = porcentajes_yes.idxmin()
+    
+                    porcentaje_mayor = porcentajes_yes.max()
+                    porcentaje_menor = porcentajes_yes.min()
+    
+                    diferencia = porcentaje_mayor - porcentaje_menor
+
+                    st.success(f"El trabajo con mayor porcentaje de aceptación es **{trabajo_mayor}**, con **{porcentaje_mayor:.2f} %**.")
+                    st.warning(f"El trabajo con menor porcentaje de aceptación es **{trabajo_menor}**, con **{porcentaje_menor:.2f} %**.")
+                    st.write(f"La diferencia entre ambos grupos es de **{diferencia:.2f} puntos porcentuales**.")
+    
+                else:
+                    st.warning("No se encontró la categoría `yes` en la variable `y`.")
+                    st.write("Categorías encontradas:", tabla_porcentajes.columns.tolist())
+
+            elif variable_2 == "education":
+                st.write("Nivel educativo más frecuente dentro de cada tipo de trabajo:")
+
+                interpretaciones = []
+                    for trabajo in tabla_porcentajes.index:
+                        educacion_principal = (tabla_porcentajes.loc[trabajo].idxmax())
+                        porcentaje_principal = tabla_porcentajes.loc[trabajo, educacion_principal]
+                        cantidad_principal = tabla_frecuencias.loc[trabajo, educacion_principal]
+
+                        interpretaciones.append({
+                            "Trabajo": trabajo,
+                            "Educación más frecuente": educacion_principal,
+                            "Cantidad": int(cantidad_principal),
+                            "Porcentaje": f"{porcentaje_principal:.2f} %"
+                        })
+    
+                    tabla_interpretacion = pd.DataFrame(interpretaciones)
+                    st.dataframe(tabla_interpretacion, hide_index=True, use_container_width=True)
+
+                    # Interpretación general
+                    combinacion_mayor = tabla_porcentajes.stack().idxmax()
+                    porcentaje_combinacion = tabla_porcentajes.stack().max()
+        
+                    trabajo_destacado, educacion_destacada = combinacion_mayor
+        
+                    st.success(f"La concentración porcentual más alta se encuentra en el trabajo **{trabajo_destacado}**, donde el nivel "
+                        f"educativo predominante es **{educacion_destacada}**, con **{porcentaje_combinacion:.2f} %**.")
 
 
 
 
 
+
+
+
+                    
+
+
+
+        
+
+# -----------------------------------------------------------------------------
+# Item 9 - Análisis basado en parámetros seleccionados
+# ----------------------------------------------------------------------------- 
+        with tabs[8]:
+            st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)            
+
+# -----------------------------------------------------------------------------
+# Item 10 - Hallazgos clave
+# ----------------------------------------------------------------------------- 
+        with tabs[9]:
+            st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)            
+
+
+    
     
 
 
