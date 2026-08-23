@@ -453,7 +453,7 @@ else:
                 st.markdown(
                     f"""
                     <div style="
-                        background-color: #2b8cbe;
+                        background-color: #ffffff;
                         padding: 12px;
                         border-radius: 8px;
                         border-left: 5px solid #1f77b4;
