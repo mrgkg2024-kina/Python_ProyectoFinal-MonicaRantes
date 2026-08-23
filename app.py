@@ -563,7 +563,7 @@ else:
                 st.warning("No existen datos válidos en las columnas age y job.")
                 st.stop()
 
-            col1, col2 = st.columns(2)
+            col1, col2 = st.columns([1,2])
             with col1:
                 # Resumen estadístico por tipo de trabajo
                 resumen = (
