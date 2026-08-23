@@ -653,7 +653,7 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[7]:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)    
-            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones: ** y (respuesta a la campaña)** y 
+            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones: **y (respuesta a la campaña)** y 
                     **education (nivel educativo)**. Se muestra un resumen estadístico de la primera y segunda variable elegida, así como el mapa de calor. Finalmente 
                     se da una breve interpretación del gráfico.""", unsafe_allow_html=True)
             st.write("")  
@@ -732,7 +732,7 @@ else:
 
             sns.heatmap(
                 tabla_porcentajes,
-                annot_kws={"fontsize": 7},
+                annot=True,
                 fmt=".1f",
                 cmap="YlGnBu",
                 linewidths=0.5,
