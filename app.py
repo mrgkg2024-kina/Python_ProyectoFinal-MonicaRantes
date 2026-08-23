@@ -62,7 +62,7 @@ def crear_grafico_barras(df4, variable):
     })
 
     # Crear gráfico
-    fig, ax = plt.subplots(figsize=(8, 4))
+    fig, ax = plt.subplots(figsize=(6, 3))
 
     barras = ax.bar(
         tabla["Categoría"],
