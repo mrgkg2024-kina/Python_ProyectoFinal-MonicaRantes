@@ -449,8 +449,9 @@ else:
             variables_categoricas = obtener_var_categoricas(df)
 
             if variables_categoricas:
-
-                st.subheader("Variables categóricas encontradas")
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Variables categóricas</p>', 
+                            unsafe_allow_html=True)
+                st.markdown("**Variables categóricas:** " + " | ".join(variables_categoricas))  # validar
                 st.write(variables_categoricas)
 
                 # Elegir cómo mostrar los resultados
