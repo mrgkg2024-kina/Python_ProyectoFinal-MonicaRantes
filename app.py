@@ -552,6 +552,131 @@ else:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (numérico vs categórico)</h2>', unsafe_allow_html=True)
             st.write("")  
 
+            # Preparar los datos
+            datos = df[["age", "job"]].copy()
+
+            # Convertir age a formato numérico
+            datos["age"] = pd.to_numeric(datos["age"], errors="coerce")
+
+            # Eliminar registros vacíos
+            datos = datos.dropna(subset=["age", "job"])
+
+            if datos.empty:
+                st.warning("No existen datos válidos en las columnas age y job.")
+            st.stop()
+
+            # Resumen estadístico por tipo de trabajo
+            resumen = (
+                datos.groupby("job")["age"]
+                .agg(
+                    cantidad="count",
+                    edad_promedio="mean",
+                    edad_mediana="median",
+                    edad_minima="min",
+                    edad_maxima="max"
+                )
+                .sort_values("edad_promedio", ascending=True)
+                .round(1)
+            )
+
+            st.subheader("Resumen estadístico")
+    
+            st.dataframe(
+                resumen,
+                use_container_width=True
+            )
+
+            # Crear gráfico horizontal
+            fig, ax = plt.subplots(figsize=(9, 6))
+    
+            barras = ax.barh(
+                resumen.index.astype(str),
+                resumen["edad_promedio"],
+                color="#4682B4",
+                edgecolor="black",
+                linewidth=0.6
+            )
+
+            # Mostrar edad promedio al final de cada barra
+            ax.bar_label(
+                barras,
+                labels=[
+                    f"{edad:.1f} años"
+                    for edad in resumen["edad_promedio"]
+                ],
+                padding=3,
+                fontsize=9
+            )
+
+            ax.set_title("Edad promedio de los clientes según su tipo de trabajo")
+            ax.set_xlabel("Edad promedio")
+            ax.set_ylabel("Tipo de trabajo")
+
+            ax.grid(axis="x", linestyle="--", alpha=0.3)
+
+            ax.spines["top"].set_visible(False)
+            ax.spines["right"].set_visible(False)
+
+            # Agregar espacio para las etiquetas
+            edad_maxima = resumen["edad_promedio"].max()
+
+            if edad_maxima > 0:
+            ax.set_xlim(0, edad_maxima * 1.20)
+
+            plt.tight_layout()
+    
+            st.subheader("Gráfico comparativo")
+    
+            st.pyplot(fig, use_container_width=False)
+
+            plt.close(fig)
+
+            # Interpretación automática
+            trabajo_mayor = resumen["edad_promedio"].idxmax()
+            promedio_mayor = resumen["edad_promedio"].max()
+
+            trabajo_menor = resumen["edad_promedio"].idxmin()
+            promedio_menor = resumen["edad_promedio"].min()
+
+            diferencia = promedio_mayor - promedio_menor
+
+            st.subheader("Interpretación")
+
+            st.write(
+                f"El grupo de clientes con trabajo **{trabajo_mayor}** "
+                f"presenta la edad promedio más alta: "
+                f"**{promedio_mayor:.1f} años**."
+            )
+    
+            st.write(
+                f"El grupo con trabajo **{trabajo_menor}** presenta la "
+                f"edad promedio más baja: **{promedio_menor:.1f} años**."
+            )
+    
+            st.write(
+                f"La diferencia entre ambas edades promedio es de "
+                f"**{diferencia:.1f} años**."
+            )
+    
+            st.caption(
+                "Este gráfico muestra una asociación entre edad y tipo de "
+                "trabajo, pero no implica una relación de causa y efecto."
+            )
+
+                
+    
+
+
+
+
+
+    
+
+
+
+
+            
+
 
 
 
