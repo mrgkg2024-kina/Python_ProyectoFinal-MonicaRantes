@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
-
-
 import importlib.util 
 import io
 from io import BytesIO
@@ -563,7 +561,7 @@ else:
 
             if datos.empty:
                 st.warning("No existen datos válidos en las columnas age y job.")
-            st.stop()
+                st.stop()
 
             # Resumen estadístico por tipo de trabajo
             resumen = (
