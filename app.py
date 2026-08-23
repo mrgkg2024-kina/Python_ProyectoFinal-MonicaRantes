@@ -62,13 +62,15 @@ def crear_grafico_barras(df4, variable):
     })
 
     # Crear gráfico
-    fig, ax = plt.subplots(figsize=(6, 3))
+    fig, ax = plt.subplots(figsize=(6,3.5))
 
     barras = ax.bar(
         tabla["Categoría"],
         tabla["Conteo"],
+        width=0.65, 
         color="steelblue",
-        edgecolor="black"
+        edgecolor="black",
+        linewidth=0.7 
     )
 
     # Agregar conteo y porcentaje sobre cada barra
