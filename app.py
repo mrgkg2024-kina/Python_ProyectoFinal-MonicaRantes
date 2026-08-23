@@ -653,9 +653,9 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[7]:
             st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)    
-            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones:**y** - **education**. 
-                    Se muestra un resumen estadístico de la primera y segunda variable elegida, así como el mapa de calor. Finalmente se da una breve interpretación del gráfico.""",
-                    unsafe_allow_html=True)
+            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones: **y(respuesta a la campaña) ** y 
+                    **education (nivel educativo)**. Se muestra un resumen estadístico de la primera y segunda variable elegida, así como el mapa de calor. Finalmente 
+                    se da una breve interpretación del gráfico.""", unsafe_allow_html=True)
             st.write("")  
   
             # ------------------------------------------
@@ -692,7 +692,9 @@ else:
             # ------------------------------------------
             # 5. Mostrar tablas
             # ------------------------------------------
-            st.subheader("Resumen estadístico")
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Resumen estadístico</p>', 
+                            unsafe_allow_html=True)   
+            #st.subheader("Resumen estadístico")
     
             columna_1, columna_2 = st.columns(2)
 
@@ -712,7 +714,9 @@ else:
             # ------------------------------------------
             # 6. Mapa de calor
             # ------------------------------------------
-            st.subheader("Mapa de calor")
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Mapa de calor</p>', 
+                            unsafe_allow_html=True)   
+            #st.subheader("Mapa de calor")
     
             if variable_2 == "y":
                 titulo = "Respuesta a la campaña según el tipo de trabajo"
@@ -756,7 +760,9 @@ else:
             # ------------------------------------------
             # 7. Interpretación automática
             # ------------------------------------------
-            st.subheader("Interpretación automática")
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Interpretación</p>', 
+                            unsafe_allow_html=True)   
+            #st.subheader("Interpretación automática")
     
             if variable_2 == "y":
                 # Verificar que exista la categoría "yes"
