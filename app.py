@@ -41,6 +41,65 @@ def segmento_marital(df2: pd.DataFrame, column: str, estado:str) -> int:
   else:
     return int(counts.get('unknown', 0))
 
+def crear_grafico_barras(df3, variable):
+    # Reemplazar valores faltantes y calcular conteos
+    datos = df[variable].fillna("Valor faltante").astype(str)
+    conteos = datos.value_counts()
+
+    # Calcular proporciones
+    proporciones = conteos / conteos.sum()
+
+    # Crear tabla de frecuencias
+    tabla = pd.DataFrame({
+        "Categoría": conteos.index,
+        "Conteo": conteos.values,
+        "Proporción": proporciones.values,
+        "Porcentaje": proporciones.values * 100
+    })
+
+    # Crear gráfico
+    fig, ax = plt.subplots(figsize=(10, 5))
+
+    barras = ax.bar(
+        tabla["Categoría"],
+        tabla["Conteo"],
+        color="steelblue",
+        edgecolor="black"
+    )
+
+    # Agregar conteo y porcentaje sobre cada barra
+    for barra, conteo, porcentaje in zip(
+        barras,
+        tabla["Conteo"],
+        tabla["Porcentaje"]
+    ):
+        ax.text(
+            barra.get_x() + barra.get_width() / 2,
+            barra.get_height(),
+            f"{conteo}\n({porcentaje:.1f}%)",
+            ha="center",
+            va="bottom",
+            fontsize=9
+        )
+
+    # Personalizar el gráfico
+    ax.set_title(f"Distribución de la variable: {variable}")
+    ax.set_xlabel(variable)
+    ax.set_ylabel("Conteo")
+    ax.tick_params(axis="x", rotation=45)
+    ax.grid(axis="y", linestyle="--", alpha=0.4)
+
+    # Evitar que las etiquetas queden cortadas
+    if len(tabla) > 0:
+        ax.set_ylim(0, tabla["Conteo"].max() * 1.18)
+
+    fig.tight_layout()
+
+    return tabla, fig
+
+
+
+
     
 # *********************************************
 # NAVEGACIÓN ENTRE LAS OPCIONES DEL MENU
@@ -378,5 +437,68 @@ else:
 # Item 6 - Análisis de variables categóricas
 # ----------------------------------------------------------------------------- 
         with tabs[5]:
-                    st.markdown('<h2 style="text-align:center;">Análisis de variables categóricas</h2>', unsafe_allow_html=True)
-                    st.write("")  
+            st.markdown('<h2 style="text-align:center;">Análisis de variables categóricas</h2>', unsafe_allow_html=True)
+            st.write("")  
+
+            # Identificar variables categóricas
+            variables_categoricas = df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
+
+            if variables_categoricas:
+
+                st.subheader("Variables categóricas encontradas")
+                st.write(variables_categoricas)
+
+                # Elegir cómo mostrar los resultados
+                opcion = st.radio(
+                    "Selecciona una opción:",
+                    [
+                        "Mostrar una variable",
+                        "Mostrar todas las variables"
+                    ]
+                )
+
+                if opcion == "Mostrar una variable":
+
+                    variable_seleccionada = st.selectbox("Selecciona una variable categórica:", variables_categoricas)
+                    tabla, fig = crear_grafico_barras(df, variable_seleccionada)
+                    st.subheader(f"Resultados de: {variable_seleccionada}")
+
+                    # Formatear la tabla
+                    st.dataframe(
+                        tabla.style.format({
+                            "Proporción": "{:.4f}",
+                            "Porcentaje": "{:.2f}%"
+                        }),
+                        use_container_width=True
+                    )
+
+                    # Mostrar gráfico
+                    st.pyplot(fig)
+                    plt.close(fig)
+
+                else:
+
+                    # Mostrar todas las variables categóricas
+                    for variable in variables_categoricas:
+                        st.subheader(f"Variable: {variable}")
+                        tabla, fig = crear_grafico_barras(df,variable)
+
+                        st.dataframe(
+                            tabla.style.format({
+                                "Proporción": "{:.4f}",
+                                "Porcentaje": "{:.2f}%"
+                            }),
+                            use_container_width=True
+                        )
+
+                        st.pyplot(fig)
+                        plt.close(fig)
+
+            else:
+                st.warning("El archivo no contiene variables categóricas.")    
+            
+
+
+
+
+
