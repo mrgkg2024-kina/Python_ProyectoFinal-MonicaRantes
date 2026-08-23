@@ -67,10 +67,10 @@ def crear_grafico_barras(df4, variable):
     barras = ax.bar(
         tabla["Categoría"],
         tabla["Conteo"],
-        width=0.65,
+        width=0.5,
         color="steelblue",
         edgecolor="black",
-        linewidth=0.7
+        linewidth=0.5
     )
 
     # Crear etiquetas con conteo y porcentaje
@@ -87,13 +87,13 @@ def crear_grafico_barras(df4, variable):
         barras,
         labels=etiquetas,
         padding=2,
-        fontsize=6
+        fontsize=5
     )
 
     # Personalizar el gráfico
     ax.set_title(
         f"Distribución de la variable: {variable}",
-        fontsize=8,
+        fontsize=7,
         fontweight="bold"
     )
     ax.set_xlabel(variable, fontsize=8)
@@ -102,11 +102,11 @@ def crear_grafico_barras(df4, variable):
     ax.tick_params(
         axis="x",
         rotation=45,
-        labelsize=6
+        labelsize=5
     )
     ax.tick_params(
         axis="y",
-        labelsize=6
+        labelsize=5
     )
 
     ax.grid(
