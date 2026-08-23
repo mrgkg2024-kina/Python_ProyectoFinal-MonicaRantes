@@ -565,6 +565,9 @@ else:
 
             col1, col2 = st.columns([1,2])
             with col1:
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Resumen estadístico (ejm. " ")</p>', 
+                            unsafe_allow_html=True)   
+                
                 # Resumen estadístico por tipo de trabajo
                 resumen = (
                     datos.groupby("job")["age"]
@@ -578,15 +581,15 @@ else:
                     .sort_values("edad_promedio", ascending=True)
                     .round(1)
                 )
-    
-                st.subheader("Resumen estadístico")
-        
+                            
                 st.dataframe(
                     resumen,
                     use_container_width=True
                 )
 
             with col2:
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Gráfico comparativo (ejm. " ")</p>', 
+                            unsafe_allow_html=True)   
                 # Crear gráfico horizontal
                 fig, ax = plt.subplots(figsize=(9, 6))
         
@@ -625,14 +628,14 @@ else:
                     ax.set_xlim(0, edad_maxima * 1.20)
     
                 plt.tight_layout()
-        
-                st.subheader("Gráfico comparativo")
-        
+                             
                 st.pyplot(fig, use_container_width=False)
     
                 plt.close(fig)
 
-            # Interpretación automática
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Interpretación (ejm. " ")</p>', 
+                            unsafe_allow_html=True)   
+            
             trabajo_mayor = resumen["edad_promedio"].idxmax()
             promedio_mayor = resumen["edad_promedio"].max()
 
@@ -640,8 +643,6 @@ else:
             promedio_menor = resumen["edad_promedio"].min()
 
             diferencia = promedio_mayor - promedio_menor
-
-            st.subheader("Interpretación")
 
             st.write(
                 f"El grupo de clientes con trabajo **{trabajo_mayor}** "
@@ -659,10 +660,6 @@ else:
                 f"**{diferencia:.1f} años**."
             )
     
-            st.caption(
-                "Este gráfico muestra una asociación entre edad y tipo de "
-                "trabajo, pero no implica una relación de causa y efecto."
-            )
 
                 
     
