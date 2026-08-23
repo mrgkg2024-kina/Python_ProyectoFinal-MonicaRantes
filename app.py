@@ -456,7 +456,7 @@ else:
                         background-color: #ffffff;
                         padding: 12px;
                         border-radius: 8px;
-                        border-left: 5px solid #2b8cbe;
+                        border: 2px solid #2b8cbe;
                         color: #2b8cbe;
                     ">
                         <strong>Variables categóricas ({len(variables_categoricas)}):</strong>
