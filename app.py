@@ -652,12 +652,17 @@ else:
 # Item 8 - Análisis bivariado (categórico vs categórico) 
 # ----------------------------------------------------------------------------- 
         with tabs[7]:
-            st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)                
+            st.markdown('<h2 style="text-align:center;">Análisis bivariado (categórico vs categórico)</h2>', unsafe_allow_html=True)    
+            st.markdown("""Como primera variable categórica tenemos **job (trabajo)** y como segunda variable se brinda 2 opciones:**y** - **education**. 
+                    Se muestra un resumen estadístico de la primera y segunda variable elegida, así como el mapa de calor. Finalmente se da una breve interpretación del gráfico.""",
+                    unsafe_allow_html=True)
+            st.write("")  
   
             # ------------------------------------------
             # 2. Selección de variables
             # ------------------------------------------
             variable_1 = "job"
+            st.write("Primera variable : **job**")  
             variable_2 = st.selectbox("Seleccione la segunda variable:", options=["y", "education"])
 
             columnas_requeridas = [variable_1, variable_2]
