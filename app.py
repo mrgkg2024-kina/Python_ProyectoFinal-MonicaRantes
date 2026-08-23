@@ -70,7 +70,9 @@ def crear_grafico_barras(df4, variable):
         width=0.65, 
         color="steelblue",
         edgecolor="black",
-        linewidth=0.7 
+        linewidth=0.7, 
+        fontsize=7,   
+        padding=2
     )
 
     # Agregar conteo y porcentaje sobre cada barra
