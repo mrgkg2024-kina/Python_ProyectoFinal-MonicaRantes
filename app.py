@@ -542,7 +542,6 @@ else:
             else:
                 st.warning("El archivo no contiene variables categóricas.")    
             
-
 # -----------------------------------------------------------------------------
 # Item 7 - Análisis bivariado (numérico vs categórico)
 # ----------------------------------------------------------------------------- 
@@ -631,10 +630,8 @@ else:
                 if edad_maxima > 0:
                     ax.set_xlim(0, edad_maxima * 1.20)
     
-                plt.tight_layout()
-                             
+                plt.tight_layout()                             
                 st.pyplot(fig, use_container_width=False)
-    
                 plt.close(fig)
 
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Interpretación</p>', 
@@ -649,16 +646,8 @@ else:
             diferencia = promedio_mayor - promedio_menor
 
             st.write(f"- El grupo de clientes con trabajo **{trabajo_mayor}** presenta la edad promedio más alta: **{promedio_mayor:.1f} años**.")
-    
-            st.write(
-                f"El grupo con trabajo **{trabajo_menor}** presenta la "
-                f"edad promedio más baja: **{promedio_menor:.1f} años**."
-            )
-    
-            st.write(
-                f"La diferencia entre ambas edades promedio es de "
-                f"**{diferencia:.1f} años**."
-            )
+            st.write(f"- El grupo con trabajo **{trabajo_menor}** presenta la edad promedio más baja: **{promedio_menor:.1f} años**.")
+            st.write(f"- La diferencia entre ambas edades promedio es de **{diferencia:.1f} años**.")
     
 
                 
