@@ -692,7 +692,7 @@ else:
             # ------------------------------------------
             # 5. Mostrar tablas
             # ------------------------------------------
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:20px;">Resumen estadístico</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:21px;">Resumen estadístico</p>', 
                             unsafe_allow_html=True)   
               
             columna_1, columna_2 = st.columns(2)
@@ -700,14 +700,12 @@ else:
             with columna_1:
                 st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Tabla de frecuencias</p>', 
                             unsafe_allow_html=True)   
-                #st.markdown("**Tabla de frecuencias absolutas**")
                 st.dataframe(tabla_frecuencias_total, use_container_width=True)
 
             with columna_2:
-                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">TTabla de porcentajes por trabajo</p>', 
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:18px;">Tabla de porcentajes por trabajo</p>', 
                             unsafe_allow_html=True)   
-                #st.markdown("**Tabla de porcentajes por trabajo**")
-                st.caption("Cada fila representa un trabajo y suma 100 %.")
+                #st.caption("Cada fila representa un trabajo y suma 100 %.")
     
                 # Agregar el símbolo % para presentación
                 tabla_porcentajes_mostrar = (tabla_porcentajes.astype(str) + " %")
@@ -718,7 +716,7 @@ else:
             # 6. Mapa de calor
             # ------------------------------------------
             st.write("")  
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:20px;">Mapa de calor</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:21px;">Mapa de calor</p>', 
                             unsafe_allow_html=True)   
                
             if variable_2 == "y":
@@ -729,28 +727,29 @@ else:
                 etiqueta_x = "Nivel educativo"
     
             sns.set_theme(style="white")
-            alto = max(5, len(tabla_porcentajes.index) * 0.55)
-            fig, ax = plt.subplots(figsize=(8, alto))
+            alto = max(3.5, len(tabla_porcentajes.index) * 0.38)
+            fig, ax = plt.subplots(figsize=(6.5, alto))
 
             sns.heatmap(
                 tabla_porcentajes,
-                annot=True,
+                annot_kws={"fontsize": 7},
                 fmt=".1f",
                 cmap="YlGnBu",
                 linewidths=0.5,
                 linecolor="white",
-                cbar_kws={"label": "Porcentaje (%)"},
+                cbar_kws={"label": "Porcentaje (%)","shrink": 0.75 },
                 ax=ax
             )
 
             ax.set_title(
                 titulo,
-                fontsize=10,
-                fontweight="bold"
+                fontsize=9,
+                fontweight="bold",
+                pad=8
             )
 
-            ax.set_xlabel(etiqueta_x)
-            ax.set_ylabel("Tipo de trabajo")
+            ax.set_xlabel(etiqueta_x, fontsize=8, labelpad=5)
+            ax.set_ylabel("Tipo de trabajo", fontsize=8, labelpad=5)
     
             ax.tick_params(axis="x", rotation=45)
             ax.tick_params(axis="y", rotation=0)
@@ -764,7 +763,7 @@ else:
             # 7. Interpretación automática
             # ------------------------------------------
             st.write("")  
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:20px;">Interpretación</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:center; font-size:21px;">Interpretación</p>', 
                             unsafe_allow_html=True)   
             #st.subheader("Interpretación automática")
     
