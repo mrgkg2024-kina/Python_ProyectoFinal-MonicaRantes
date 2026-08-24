@@ -917,6 +917,34 @@ else:
                     st.warning("No existen registros para analizar con los filtros aplicados.")
                     st.stop()
                 
+                # ==========================================================
+                # 4. DETERMINAR LAS VARIABLES QUE SE ANALIZARÁN
+                # ==========================================================
+                
+                # Se analizan las columnas que el usuario seleccionó como filtros.
+                numericas_analisis = [
+                    columna
+                    for columna in columnas_numericas_filtro
+                    if columna in df_filtrado.columns
+                ]
+                
+                categoricas_analisis = [
+                    columna
+                    for columna in columnas_categoricas_filtro
+                    if columna in df_filtrado.columns
+                ]
+                
+                
+                # Si no se seleccionaron filtros, se pueden usar todas las variables.
+                if not numericas_analisis and not categoricas_analisis:
+                    st.info(
+                        "No se seleccionaron columnas para filtrar. "
+                        "Se mostrarán gráficos generales del conjunto de datos."
+                    )
+                
+                    # Se limita la cantidad para no saturar la aplicación.
+                    numericas_analisis = var_numericas[:4]
+                    categoricas_analisis = var_categoricas[:4]
 
         
         
