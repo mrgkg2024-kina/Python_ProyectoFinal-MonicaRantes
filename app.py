@@ -852,7 +852,7 @@ else:
             # ==========================================================
             # 1. SELECCIONAR VARIABLES CATEGÓRICAS PARA FILTRAR
             # ==========================================================
-            columnas_categoricas_filtro = st.multiselect("Seleccione variables categóricas para filtrar", options=variables_categoricas)
+            columnas_categoricas_filtro = st.multiselect("Seleccione variables categóricas para filtrar", options=var_categoricas)
 
             for columna in columnas_categoricas_filtro:
             
