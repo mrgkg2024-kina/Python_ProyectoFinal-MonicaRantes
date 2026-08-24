@@ -885,6 +885,12 @@ else:
                 # Aplicar filtro numérico
                 df_filtrado = df_filtrado[serie.between(rango_seleccionado[0], rango_seleccionado[1], inclusive="both")]
 
+                # ==========================================================
+                # 3. MOSTRAR RESULTADO
+                # ==========================================================
+                st.write(f"Registros originales: **{len(df)}** | "Registros filtrados: **{len(df_filtrado)}**")
+                
+                st.dataframe(df_filtrado, use_container_width=True)
 
 
         
