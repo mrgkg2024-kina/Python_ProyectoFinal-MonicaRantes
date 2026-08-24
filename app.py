@@ -853,7 +853,41 @@ else:
                     df_filtrado = df_filtrado[serie.isin(valores_seleccionados)]
                 else:
                     df_filtrado = df_filtrado.iloc[0:0]
+
+            # ==========================================================
+            # 2. SELECCIONAR VARIABLES NUMÉRICAS PARA FILTRAR
+            # ==========================================================
+            columnas_numericas_filtro = st.multiselect("Seleccione variables numéricas para filtrar", options=var_numericas)
             
+            for columna in columnas_numericas_filtro:
+            
+                serie = pd.to_numeric(df_filtrado[columna], errors="coerce")
+            
+                if serie.dropna().empty:
+                    st.warning(f"La variable {columna} no contiene valores válidos.")
+                    continue
+            
+                minimo = float(serie.min())
+                maximo = float(serie.max())
+            
+                if minimo == maximo:
+                    st.info(f"{columna} contiene un único valor: {minimo:g}")
+                    continue
+            
+                rango_seleccionado = st.slider(
+                    f"Seleccione el rango de {columna}",
+                    min_value=minimo,
+                    max_value=maximo,
+                    value=(minimo, maximo),
+                    key=f"filtro_num_{columna}"
+                )
+            
+                # Aplicar filtro numérico
+                df_filtrado = df_filtrado[serie.between(rango_seleccionado[0], rango_seleccionado[1], inclusive="both")]
+
+
+
+        
 
 # -----------------------------------------------------------------------------
 # Item 10 - Hallazgos clave
