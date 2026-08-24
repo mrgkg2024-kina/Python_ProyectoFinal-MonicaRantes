@@ -9,6 +9,7 @@ from textwrap import dedent
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import itertools
 
 st.set_page_config(
     page_title="Proyecto Final - Caso Nro. 1",
