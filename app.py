@@ -827,21 +827,6 @@ else:
             st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)   
             st.subheader("Selección de columnas")
 
-            columnas_seleccionadas = st.multiselect("Seleccione las columnas que desea analizar", 
-                                                    options=df.columns.tolist(), default=df.columns.tolist())
-            
-            if not columnas_seleccionadas:
-                st.warning("Debe seleccionar al menos una columna.")
-                st.stop()
-            
-            df_base = df[columnas_seleccionadas].copy()
-
-# -----------------------------------------------------------------------------
-# Item 10 - Hallazgos clave
-# ----------------------------------------------------------------------------- 
-        with tabs[9]:
-            st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
-            
             var_numericas = obtener_var_numericas(df)
             var_categoricas = obtener_var_categoricas(df)
             st.subheader("Filtros")
@@ -868,6 +853,15 @@ else:
                     df_filtrado = df_filtrado[serie.isin(valores_seleccionados)]
                 else:
                     df_filtrado = df_filtrado.iloc[0:0]
+            
+
+# -----------------------------------------------------------------------------
+# Item 10 - Hallazgos clave
+# ----------------------------------------------------------------------------- 
+        with tabs[9]:
+            st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
+            
+            
             
             
                             
