@@ -1032,6 +1032,239 @@ else:
                                 use_container_width=True
                             )
                 
+                # ==========================================================
+                # 7. MATRIZ DE CORRELACIÓN
+                # ==========================================================
+                
+                if len(numericas_analisis) >= 2:
+                
+                    st.subheader("Relación entre variables numéricas")
+                
+                    datos_correlacion = (
+                        df_filtrado[numericas_analisis]
+                        .apply(pd.to_numeric, errors="coerce")
+                    )
+                
+                    # Eliminar variables constantes, porque su correlación es indefinida.
+                    columnas_validas = [
+                        columna
+                        for columna in datos_correlacion.columns
+                        if datos_correlacion[columna].nunique(dropna=True) > 1
+                    ]
+                
+                    if len(columnas_validas) >= 2:
+                
+                        matriz_correlacion = (
+                            datos_correlacion[columnas_validas]
+                            .corr()
+                        )
+                
+                        fig, ax = plt.subplots(
+                            figsize=(
+                                max(7, len(columnas_validas)),
+                                max(5, len(columnas_validas) * 0.7)
+                            )
+                        )
+                
+                        sns.heatmap(
+                            matriz_correlacion,
+                            annot=True,
+                            fmt=".2f",
+                            cmap="coolwarm",
+                            center=0,
+                            vmin=-1,
+                            vmax=1,
+                            linewidths=0.5,
+                            ax=ax
+                        )
+                
+                        ax.set_title("Matriz de correlación")
+                
+                        plt.tight_layout()
+                        st.pyplot(fig)
+                        plt.close(fig)
+                
+                    else:
+                        st.info(
+                            "No hay suficientes variables numéricas con variación "
+                            "para calcular la correlación."
+                        )
+                
+                
+                # ==========================================================
+                # 8. VARIABLE CATEGÓRICA VS. VARIABLE NUMÉRICA
+                # ==========================================================
+                
+                if categoricas_analisis and numericas_analisis:
+                
+                    st.subheader("Comparación entre variables categóricas y numéricas")
+                
+                    # Se generan todas las combinaciones disponibles.
+                    combinaciones_mixtas = list(
+                        itertools.product(
+                            categoricas_analisis,
+                            numericas_analisis
+                        )
+                    )
+                
+                    # Evita generar demasiados gráficos.
+                    maximo_graficos_mixtos = 6
+                
+                    if len(combinaciones_mixtas) > maximo_graficos_mixtos:
+                        st.info(
+                            f"Existen {len(combinaciones_mixtas)} combinaciones. "
+                            f"Se mostrarán las primeras {maximo_graficos_mixtos}."
+                        )
+                
+                    for variable_cat, variable_num in (
+                        combinaciones_mixtas[:maximo_graficos_mixtos]
+                    ):
+                
+                        datos_grafico = df_filtrado[
+                            [variable_cat, variable_num]
+                        ].copy()
+                
+                        datos_grafico[variable_cat] = (
+                            datos_grafico[variable_cat]
+                            .astype("string")
+                            .fillna("Sin dato")
+                        )
+                
+                        datos_grafico[variable_num] = pd.to_numeric(
+                            datos_grafico[variable_num],
+                            errors="coerce"
+                        )
+                
+                        datos_grafico = datos_grafico.dropna(
+                            subset=[variable_num]
+                        )
+                
+                        if datos_grafico.empty:
+                            continue
+                
+                        # Ordenar las categorías según la mediana.
+                        orden_categorias = (
+                            datos_grafico
+                            .groupby(variable_cat)[variable_num]
+                            .median()
+                            .sort_values()
+                            .index
+                        )
+                
+                        figura_alto = max(
+                            4,
+                            min(
+                                10,
+                                datos_grafico[variable_cat].nunique() * 0.4
+                            )
+                        )
+                
+                        fig, ax = plt.subplots(figsize=(9, figura_alto))
+                
+                        sns.boxplot(
+                            data=datos_grafico,
+                            x=variable_num,
+                            y=variable_cat,
+                            order=orden_categorias,
+                            color="skyblue",
+                            ax=ax
+                        )
+                
+                        ax.set_title(
+                            f"Distribución de {variable_num} por {variable_cat}"
+                        )
+                
+                        ax.set_xlabel(variable_num)
+                        ax.set_ylabel(variable_cat)
+                
+                        plt.tight_layout()
+                        st.pyplot(fig)
+                        plt.close(fig)
+                
+                
+                # ==========================================================
+                # 9. RELACIÓN ENTRE VARIABLES CATEGÓRICAS
+                # ==========================================================
+                
+                if len(categoricas_analisis) >= 2:
+                
+                    st.subheader("Relación entre variables categóricas")
+                
+                    combinaciones_categoricas = list(
+                        itertools.combinations(
+                            categoricas_analisis,
+                            2
+                        )
+                    )
+                
+                    maximo_mapas_calor = 4
+                
+                    if len(combinaciones_categoricas) > maximo_mapas_calor:
+                        st.info(
+                            f"Existen {len(combinaciones_categoricas)} combinaciones "
+                            f"categóricas. Se mostrarán las primeras "
+                            f"{maximo_mapas_calor}."
+                        )
+                
+                    for variable_fila, variable_columna in (
+                        combinaciones_categoricas[:maximo_mapas_calor]
+                    ):
+                
+                        datos_grafico = df_filtrado[
+                            [variable_fila, variable_columna]
+                        ].copy()
+                
+                        datos_grafico[variable_fila] = (
+                            datos_grafico[variable_fila]
+                            .astype("string")
+                            .fillna("Sin dato")
+                        )
+                
+                        datos_grafico[variable_columna] = (
+                            datos_grafico[variable_columna]
+                            .astype("string")
+                            .fillna("Sin dato")
+                        )
+                
+                        tabla_porcentajes = pd.crosstab(
+                            datos_grafico[variable_fila],
+                            datos_grafico[variable_columna],
+                            normalize="index"
+                        ) * 100
+                
+                        if tabla_porcentajes.empty:
+                            continue
+                
+                        ancho = max(
+                            7,
+                            min(16, len(tabla_porcentajes.columns) * 1.1)
+                        )
+                
+                        alto = max(
+                            4,
+                            min(12, len(tabla_porcentajes.index) * 0.45)
+                        )
+                
+                        fig, ax = plt.subplots(figsize=(ancho, alto))
+                
+                        sns.heatmap(
+                            tabla_porcentajes,
+                            annot=True,
+                            fmt=".1f",
+                            cmap="Blues",
+                            linewidths=0.5,
+                            annot_kws={"fontsize": 8},
+                            cbar_kws={
+                                "label": "Porcentaje",
+                                "shrink": 0.8
+                            },
+                            ax=ax
+                        )
+                
+                        ax.set_title(
+                            f"Distribución porcentual: "
+                            f"{variable_fila} vs. {variable_columna}"
+                        )
 
        
         
