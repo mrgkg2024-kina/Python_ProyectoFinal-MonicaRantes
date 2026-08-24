@@ -28,8 +28,8 @@ st.sidebar.title("Menú")
 def load_data_from_bytes(file_bytes: bytes) -> pd.DataFrame:
     return pd.read_csv(BytesIO(file_bytes), sep=';')
 
-def segmento_marital(df2: pd.DataFrame, column: str, estado:str) -> int:
-  counts = df2['marital'].value_counts(dropna=False)
+def segmento_marital(df1: pd.DataFrame, column: str, estado:str) -> int:
+  counts = df1['marital'].value_counts(dropna=False)
   if estado=="single":
      return int(counts.get('single', 0))
   elif estado=="married":
@@ -39,9 +39,12 @@ def segmento_marital(df2: pd.DataFrame, column: str, estado:str) -> int:
   else:
     return int(counts.get('unknown', 0))
 
-def obtener_var_categoricas(df3:pd.Dataframe) -> list:
-    return df.select_dtypes(include=["object", "category", "string"]).columns.tolist()
+def obtener_var_categoricas(df2:pd.Dataframe) -> list:
+    return df2.select_dtypes(include=["object", "category", "string"]).columns.tolist()
 
+def obtener_var_numericas(df3:pd.Dataframe) -> list:
+    return df3.select_dtypes(include=["number"]).columns.tolist()
+    
 
 def crear_grafico_barras(df4, variable):
     # Reemplazar valores faltantes y calcular conteos
@@ -280,7 +283,8 @@ else:
         para lo cual se utiliza la función personalizada **segmento_marital**. También se puede elegir visualizar los totales de todos los tipos registrados
         en la columna **marital**.  \n """)
         
-        columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
+        columnas_numericas = obtener_var_numericas(df)
+        #columnas_numericas = df.select_dtypes(include=["number"]).columns.tolist()
         columnas_categoricas = obtener_var_categoricas(df) 
         
         col1, col2,col3 = st.columns(3)
@@ -315,7 +319,8 @@ else:
         st.write("")    
 
         # columnas
-        num_cols = df.select_dtypes(include=["number"]).columns
+        num_cols = obtener_var_numericas(df)
+        #num_cols = df.select_dtypes(include=["number"]).columns
         #cat_cols = df.select_dtypes(include=["object", "category", "string"]).columns
         cat_cols = obtener_var_categoricas(df)
         
@@ -440,8 +445,9 @@ else:
             st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:18px;">Histogramas de las variables numéricas</p>', 
                             unsafe_allow_html=True)
             st.write("")  
-       
-            num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+
+            num_cols = obtener_var_numericas(df)
+            #num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
             sns.set(style="whitegrid")   
            
             color = "#2b8cbe"
@@ -817,24 +823,12 @@ else:
                 st.success(f"La concentración porcentual más alta se encuentra en el trabajo **{trabajo_destacado}**, donde el nivel "
                     f"educativo predominante es **{educacion_destacada}**, con **{porcentaje_combinacion:.2f} %**.")
 
-
-
-
-
-
-
-
-                    
-
-
-
-        
-
 # -----------------------------------------------------------------------------
 # Item 9 - Análisis basado en parámetros seleccionados
 # ----------------------------------------------------------------------------- 
         with tabs[8]:
-            st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)            
+            st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)   
+            
 
 # -----------------------------------------------------------------------------
 # Item 10 - Hallazgos clave
