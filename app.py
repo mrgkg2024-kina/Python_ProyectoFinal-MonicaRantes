@@ -320,8 +320,6 @@ else:
 
         # columnas
         num_cols = obtener_var_numericas(df)
-        #num_cols = df.select_dtypes(include=["number"]).columns
-        #cat_cols = df.select_dtypes(include=["object", "category", "string"]).columns
         cat_cols = obtener_var_categoricas(df)
         
         # Estadísticas de variables numéricas
@@ -447,7 +445,6 @@ else:
             st.write("")  
 
             num_cols = obtener_var_numericas(df)
-            #num_cols = df.select_dtypes(include=[np.number]).columns.tolist()
             sns.set(style="whitegrid")   
            
             color = "#2b8cbe"
@@ -843,14 +840,41 @@ else:
 # Item 10 - Hallazgos clave
 # ----------------------------------------------------------------------------- 
         with tabs[9]:
-             st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
+            st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
             
+            var_numericas = obtener_var_numericas(df)
+            var_categoricas = obtener_var_categoricas(df)
+            st.subheader("Filtros")
 
+            # Copia del DataFrame sobre la cual se aplicarán los filtros
+            df_filtrado = df.copy()
+  
+            # ==========================================================
+            # 1. SELECCIONAR VARIABLES CATEGÓRICAS PARA FILTRAR
+            # ==========================================================
+            columnas_categoricas_filtro = st.multiselect("Seleccione variables categóricas para filtrar", options=variables_categoricas)
 
-    
-    
-
-
+            for columna in columnas_categoricas_filtro:
+            
+                # Los valores nulos se muestran como una opción
+                serie = (df_filtrado[columna].astype("string").fillna("Sin dato"))
+            
+                opciones = sorted(serie.unique().tolist())
+            
+                valores_seleccionados = st.multiselect(f"Seleccione valores de {columna}", options=opciones, default=opciones, key=f"filtro_cat_{columna}")
+            
+                # Aplicar filtro categórico
+                if valores_seleccionados:
+                    df_filtrado = df_filtrado[serie.isin(valores_seleccionados)]
+                else:
+                    df_filtrado = df_filtrado.iloc[0:0]
+            
+            
+                            
+            
+                            
+            
+            
 
 
             
