@@ -828,12 +828,6 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[8]:
             st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)   
-            
-
-# -----------------------------------------------------------------------------
-# Item 10 - Hallazgos clave
-# ----------------------------------------------------------------------------- 
-        with tabs[9]:
             st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)  
             st.subheader("Selección de columnas")
 
@@ -845,6 +839,12 @@ else:
                 st.stop()
             
             df_base = df[columnas_seleccionadas].copy()
+
+# -----------------------------------------------------------------------------
+# Item 10 - Hallazgos clave
+# ----------------------------------------------------------------------------- 
+        with tabs[9]:
+            
 
 
     
