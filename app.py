@@ -888,11 +888,37 @@ else:
                 # ==========================================================
                 # 3. MOSTRAR RESULTADO
                 # ==========================================================
-                st.write(f"Registros originales: **{len(df)}** | Registros filtrados: **{len(df_filtrado)}**")
+                #st.write(f"Registros originales: **{len(df)}** | Registros filtrados: **{len(df_filtrado)}**")
                 
-                st.dataframe(df_filtrado, use_container_width=True)
+                #st.dataframe(df_filtrado, use_container_width=True)
 
 
+                # ==========================================================
+                # 3. VALIDACIÓN Y RESUMEN DEL FILTRADO
+                # ==========================================================
+                
+                st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)
+                
+                total_original = len(df)
+                total_filtrado = len(df_filtrado)
+                total_eliminado = total_original - total_filtrado
+                
+                porcentaje_conservado = (total_filtrado / total_original * 100 if total_original > 0 else 0)
+                
+                col1, col2, col3, col4 = st.columns(4)
+                
+                col1.metric("Registros originales", total_original)
+                col2.metric("Registros filtrados", total_filtrado)
+                col3.metric("Registros eliminados", total_eliminado)
+                col4.metric("Datos conservados", f"{porcentaje_conservado:.1f}%")
+                
+                
+                if df_filtrado.empty:
+                    st.warning("No existen registros para analizar con los filtros aplicados.")
+                    st.stop()
+                
+
+        
         
 
 # -----------------------------------------------------------------------------
