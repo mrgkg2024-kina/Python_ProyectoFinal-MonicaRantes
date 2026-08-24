@@ -888,7 +888,7 @@ else:
                 # ==========================================================
                 # 3. MOSTRAR RESULTADO
                 # ==========================================================
-                st.write(f"Registros originales: **{len(df)}** | "Registros filtrados: **{len(df_filtrado)}**")
+                st.write(f"Registros originales: **{len(df)}** | Registros filtrados: **{len(df_filtrado)}**")
                 
                 st.dataframe(df_filtrado, use_container_width=True)
 
