@@ -946,7 +946,94 @@ else:
                     numericas_analisis = var_numericas[:4]
                     categoricas_analisis = var_categoricas[:4]
 
-        
+                # ==========================================================
+                # 5. GRÁFICOS DE VARIABLES NUMÉRICAS
+                # ==========================================================
+                
+                if numericas_analisis:
+                
+                    st.subheader("Distribución de variables numéricas")
+                
+                    for variable in numericas_analisis:
+                
+                        datos = pd.to_numeric(df_filtrado[variable], errors="coerce").dropna()
+                
+                        if datos.empty:
+                            st.warning(f"La variable {variable} no contiene valores válidos.")
+                            continue
+                
+                        st.markdown(f"#### {variable}")
+                        columna_histograma, columna_boxplot = st.columns([2, 1])
+                
+                        # Histograma
+                        with columna_histograma:
+                
+                            fig, ax = plt.subplots(figsize=(7, 4))
+                
+                            sns.histplot(
+                                datos,
+                                bins="auto",
+                                kde=True,
+                                color="steelblue",
+                                ax=ax
+                            )
+                
+                            ax.axvline(
+                                datos.mean(),
+                                color="red",
+                                linestyle="--",
+                                label=f"Media: {datos.mean():.2f}"
+                            )
+                
+                            ax.axvline(
+                                datos.median(),
+                                color="green",
+                                linestyle=":",
+                                label=f"Mediana: {datos.median():.2f}"
+                            )
+                
+                            ax.set_title(f"Distribución de {variable}")
+                            ax.set_xlabel(variable)
+                            ax.set_ylabel("Frecuencia")
+                            ax.legend()
+                
+                            plt.tight_layout()
+                            st.pyplot(fig)
+                            plt.close(fig)
+                
+                        # Boxplot
+                        with columna_boxplot:
+                
+                            fig, ax = plt.subplots(figsize=(5, 4))
+                
+                            sns.boxplot(
+                                y=datos,
+                                color="orange",
+                                ax=ax
+                            )
+                
+                            ax.set_title(f"Boxplot de {variable}")
+                            ax.set_ylabel(variable)
+                            ax.set_xlabel("")
+                
+                            plt.tight_layout()
+                            st.pyplot(fig)
+                            plt.close(fig)
+                
+                        # Estadísticas descriptivas
+                        with st.expander(f"Ver estadísticas de {variable}"):
+                
+                            resumen = datos.describe().to_frame("Resultado")
+                            resumen.loc["mediana"] = datos.median()
+                            resumen.loc["varianza"] = datos.var()
+                
+                            st.dataframe(
+                                resumen,
+                                use_container_width=True
+                            )
+                
+
+       
         
 
 # -----------------------------------------------------------------------------
