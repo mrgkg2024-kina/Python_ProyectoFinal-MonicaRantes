@@ -828,7 +828,6 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[8]:
             st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)   
-            st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)  
             st.subheader("Selección de columnas")
 
             columnas_seleccionadas = st.multiselect("Seleccione las columnas que desea analizar", 
@@ -844,6 +843,7 @@ else:
 # Item 10 - Hallazgos clave
 # ----------------------------------------------------------------------------- 
         with tabs[9]:
+             st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
             
 
 
