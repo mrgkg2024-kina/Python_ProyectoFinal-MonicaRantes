@@ -1284,7 +1284,7 @@ else:
                         variables_numericas
                     )
             
-                    fig, ax = plt.subplots(figsize=(4, 2.5))
+                    fig, ax = plt.subplots(figsize=(4, 3))
             
                     sns.histplot(
                         data=df,
@@ -1347,7 +1347,7 @@ else:
             
                     correlacion = df[variables_numericas].corr()
             
-                    fig, ax = plt.subplots(figsize=(5, 3))
+                    fig, ax = plt.subplots(figsize=(4, 3))
             
                     heatmap = sns.heatmap(
                         correlacion,
