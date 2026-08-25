@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-
 import importlib.util 
 import io
 from io import BytesIO
@@ -1135,9 +1134,6 @@ else:
                     plt.tight_layout()
                     st.pyplot(fig)
                     plt.close(fig)
-                
-       
-        
 
 # -----------------------------------------------------------------------------
 # Item 10 - Hallazgos clave
