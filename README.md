@@ -20,16 +20,19 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 
 ## Instrucciones de ejecución
 1. Una vez cargada la aplicación, revisar el menú (lado izquierdo).
-2. Las opciones de menú son Home: y Carga del dataset
+2. Las opciones de menú son Home: y Carga del dataset.
 3. En la carga del dataset, seleccionar el archivo BankMarketing.csv
-4. Una vez cargada la vista previa del dataset. visualizar cada uno de los items 
-5. 
+4. Una vez cargada la vista previa del dataset. visualizar cada uno de los items (tabs).
+   ![SuperMarket Plus BI](assets/supermarket-plus-bi.png)
 
 ## Funcionalidades
 - Carga del Dataset 
 - Vista previa del Dataset
 - Desarrollo de 10 ítems de análisis:
-  - Ítem 1: Información general del dataset 
+  - Ítem 1: Información general del dataset
+     
+
+
   - Ítem 2: Clasificación de variables
   - Ítem 3: Estadísticas descriptivas
   - Ítem 4: Análisis de valores faltantes
