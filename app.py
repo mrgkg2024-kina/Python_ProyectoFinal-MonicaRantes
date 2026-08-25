@@ -1393,26 +1393,6 @@ else:
                 st.info("No fue posible generar hallazgos automáticos.")
             
             
-            # =========================================================
-            # 5. CONCLUSIÓN EDITABLE
-            # =========================================================
-            
-            st.subheader("Conclusión general")
-            
-            conclusion = st.text_area(
-                "Puedes editar o complementar la conclusión:",
-                value=(
-                    "El análisis exploratorio permitió identificar las principales "
-                    "características, distribuciones y relaciones presentes en los "
-                    "datos filtrados. Estos hallazgos pueden utilizarse como base "
-                    "para análisis posteriores y para la toma de decisiones."
-                ),
-                height=130
-            )
-            
-            st.success(conclusion)
-
-            
             
             
             
