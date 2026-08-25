@@ -1049,8 +1049,8 @@ else:
                         vmin=-1,
                         vmax=1,
                         linewidths=0.3,
-                        annot_kws={"fontsize": 4},
-                        cbar_kws={"shrink": 0.5},
+                        annot_kws={"fontsize": 3},
+                        cbar_kws={"shrink": 0.3},
                         ax=ax
                     )
                 
