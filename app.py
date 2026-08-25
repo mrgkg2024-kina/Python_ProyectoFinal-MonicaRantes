@@ -826,11 +826,11 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[8]:
             st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)   
-            st.subheader("Selección de columnas")
-
+          
             var_numericas = obtener_var_numericas(df)
             var_categoricas = obtener_var_categoricas(df)
-            st.subheader("Filtros")
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:21px;">Filtros</p>', 
+                            unsafe_allow_html=True)   
 
             # Copia del DataFrame sobre la cual se aplicarán los filtros
             df_filtrado = df.copy()
@@ -897,9 +897,9 @@ else:
                 # ==========================================================
                 # 3. VALIDACIÓN Y RESUMEN DEL FILTRADO
                 # ==========================================================
-                
-                st.markdown('<h2 style="text-align:center;">Análisis basado en parámetros seleccionados</h2>', unsafe_allow_html=True)
-                
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-center:left; font-size:21px;">Análisis basado en parámetros seleccionados</p>', 
+                            unsafe_allow_html=True)   
+                                
                 total_original = len(df)
                 total_filtrado = len(df_filtrado)
                 total_eliminado = total_original - total_filtrado
@@ -952,9 +952,9 @@ else:
                 # ==========================================================
                 
                 if numericas_analisis:
-                
-                    st.subheader("Distribución de variables numéricas")
-                
+                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-center:left; font-size:18px;">Distribución de variables numéricas</p>', 
+                            unsafe_allow_html=True)   
+                                   
                     for variable in numericas_analisis:
                 
                         datos = pd.to_numeric(df_filtrado[variable], errors="coerce").dropna()
@@ -1097,9 +1097,9 @@ else:
                 # ==========================================================
                 
                 if categoricas_analisis and numericas_analisis:
-                
-                    st.subheader("Comparación entre variables categóricas y numéricas")
-                
+                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-left:left; font-size:21px;">Comparación entre variables categóricas y numéricas</p>', 
+                            unsafe_allow_html=True)   
+                                    
                     # Se generan todas las combinaciones disponibles.
                     combinaciones_mixtas = list(
                         itertools.product(
