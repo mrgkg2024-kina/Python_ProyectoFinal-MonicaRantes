@@ -1161,38 +1161,45 @@ else:
                 <style>
                 /* Contenedor de cada métrica */
                 div[data-testid="stMetric"] {
-                    background-color: #1E3A5F; /* Color de fondo */
+                    background-color: #1E3A5F;
                     border: 1px solid #4C78A8;
                     border-radius: 12px;
                     padding: 15px 10px;
                     text-align: center;
                 }
             
-                /* Título de la métrica */
+                /* Contenedor del título */
                 div[data-testid="stMetricLabel"] {
                     justify-content: center;
-                }
-            
-                div[data-testid="stMetricLabel"] p {
-                    color: #FFD166;       /* Color del título */
-                    font-size: 14px;      /* Tamaño del título */
-                    font-weight: 600;
                     text-align: center;
                     width: 100%;
                 }
             
+                /* Texto del título: compatible con distintas versiones */
+                div[data-testid="stMetricLabel"],
+                div[data-testid="stMetricLabel"] p,
+                div[data-testid="stMetricLabel"] div,
+                div[data-testid="stMetricLabel"] span {
+                    color: #FFD166 !important;
+                    font-size: 14px !important;
+                    font-weight: 600 !important;
+                }
+            
                 /* Valor de la métrica */
-                div[data-testid="stMetricValue"] {
-                    color: #FFD166;       /* Color del valor */
-                    font-size: 12px;      /* Tamaño del valor */
-                    font-weight: bold;
+                div[data-testid="stMetricValue"],
+                div[data-testid="stMetricValue"] div {
+                    color: #FFFFFF !important;
+                    font-size: 24px !important;
+                    font-weight: bold !important;
                     text-align: center;
                     width: 100%;
                 }
                 </style>
                 """,
                 unsafe_allow_html=True
-            )
+            )    
+
+            
             
             total_nulos = int(df.isna().sum().sum())
             col1, col2, col3, col4, col5 = st.columns(5)
