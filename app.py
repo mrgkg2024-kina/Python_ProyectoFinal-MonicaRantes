@@ -1146,8 +1146,8 @@ else:
             st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
 
             # Identificación de variables
-            variables_numericas = obtener_var_numericas(df)
-            variables_categoricas = obtener_var_categoricas(df)
+            var2_numericas = obtener_var_numericas(df)
+            var2_categoricas = obtener_var_categoricas(df)
             
             # =========================================================
             # 2. RESUMEN GENERAL
@@ -1218,8 +1218,8 @@ else:
 
             col1.metric("Registros", f"{len(df):,}")
             col2.metric("Variables", df.shape[1])
-            col3.metric("Variables numéricas", len(variables_numericas))
-            col4.metric("Variables categóricas", len(variables_categoricas))
+            col3.metric("Variables numéricas", len(var2_numericas))
+            col4.metric("Variables categóricas", len(var2_categoricas))
             col5.metric("Valores nulos", f"{total_nulos:,}")
             
             
@@ -1241,8 +1241,8 @@ else:
             
             if tipo_grafico == "Distribución de variable categórica":
             
-                if variables_categoricas:
-                    variable = st.selectbox("Variable categórica:", variables_categoricas)
+                if var2_categoricas:
+                    variable = st.selectbox("Variable categórica:", var2_categoricas)
             
                     frecuencias = (
                         df[variable]
@@ -1282,8 +1282,8 @@ else:
             
             elif tipo_grafico == "Distribución de variable numérica":
             
-                if variables_numericas:
-                    variable = st.selectbox("Variable numérica:", variables_numericas)
+                if var2_numericas:
+                    variable = st.selectbox("Variable numérica:", var2_numericas)
             
                     fig, ax = plt.subplots(figsize=(5, 3))
             
@@ -1342,9 +1342,9 @@ else:
             
             else:
             
-                if len(variables_numericas) >= 2:
+                if len(var2_numericas) >= 2:
             
-                    correlacion = df[variables_numericas].corr()
+                    correlacion = df[var2_numericas].corr()
             
                     fig, ax = plt.subplots(figsize=(4, 3))
             
@@ -1433,8 +1433,8 @@ else:
                     )
             
             # Hallazgo de correlación
-            if len(variables_numericas) >= 2:
-                matriz = df[variables_numericas].corr()
+            if len(var2_numericas) >= 2:
+                matriz = df[var2_numericas].corr()
                 mascara = np.triu(np.ones(matriz.shape, dtype=bool), k=1)
 
                 pares = matriz.where(mascara).stack()
