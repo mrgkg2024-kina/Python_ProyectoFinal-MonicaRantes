@@ -1144,6 +1144,282 @@ else:
 # ----------------------------------------------------------------------------- 
         with tabs[9]:
             st.markdown('<h2 style="text-align:center;">Hallazgos clave</h2>', unsafe_allow_html=True)   
+
+            # Identificación de variables
+            variables_numericas = obtener_var_numericas(df)
+            variables_categoricas = obtener_var_categoricas(df)
+            
+            # =========================================================
+            # 2. RESUMEN GENERAL
+            # =========================================================
+            
+            st.subheader("Resumen general")
+            
+            col1, col2, col3, col4 = st.columns(4)
+            
+            col1.metric("Registros", f"{len(df):,}")
+            col2.metric("Variables", df.shape[1])
+            col3.metric("Variables numéricas", len(variables_numericas))
+            col4.metric("Variables categóricas", len(variables_categoricas))
+            
+            total_nulos = int(df.isna().sum().sum())
+            porcentaje_nulos = (total_nulos / df.size) * 100 if df.size > 0 else 0
+            
+            st.metric(
+                "Valores nulos",
+                f"{total_nulos:,}",
+                f"{porcentaje_nulos:.2f}% del total",
+                delta_color="off"
+            )
+            
+            
+            # =========================================================
+            # 3. VISUALIZACIÓN RESUMEN
+            # =========================================================
+            
+            st.subheader("Visualización resumen")
+            
+            tipo_grafico = st.selectbox(
+                "Selecciona el tipo de resumen:",
+                [
+                    "Distribución de variable categórica",
+                    "Distribución de variable numérica",
+                    "Matriz de correlación"
+                ]
+            )
+            
+            if tipo_grafico == "Distribución de variable categórica":
+            
+                if variables_categoricas:
+                    variable = st.selectbox(
+                        "Variable categórica:",
+                        variables_categoricas
+                    )
+            
+                    frecuencias = (
+                        df[variable]
+                        .fillna("Sin dato")
+                        .astype(str)
+                        .value_counts()
+                        .head(15)
+                        .sort_values()
+                    )
+            
+                    fig, ax = plt.subplots(figsize=(7, 4))
+            
+                    frecuencias.plot(
+                        kind="barh",
+                        color="#4C78A8",
+                        ax=ax
+                    )
+            
+                    ax.set_title(f"Distribución de {variable}")
+                    ax.set_xlabel("Cantidad de registros")
+                    ax.set_ylabel(variable)
+            
+                    plt.tight_layout()
+                    st.pyplot(fig)
+                    plt.close(fig)
+            
+                else:
+                    st.info("No existen variables categóricas.")
+            
+            elif tipo_grafico == "Distribución de variable numérica":
+            
+                if variables_numericas:
+                    variable = st.selectbox(
+                        "Variable numérica:",
+                        variables_numericas
+                    )
+            
+                    fig, ax = plt.subplots(figsize=(7, 4))
+            
+                    sns.histplot(
+                        data=df,
+                        x=variable,
+                        kde=True,
+                        color="#59A14F",
+                        ax=ax
+                    )
+            
+                    media = df[variable].mean()
+                    mediana = df[variable].median()
+            
+                    ax.axvline(
+                        media,
+                        color="red",
+                        linestyle="--",
+                        label=f"Media: {media:.2f}"
+                    )
+            
+                    ax.axvline(
+                        mediana,
+                        color="orange",
+                        linestyle=":",
+                        label=f"Mediana: {mediana:.2f}"
+                    )
+            
+                    ax.set_title(f"Distribución de {variable}")
+                    ax.legend()
+            
+                    plt.tight_layout()
+                    st.pyplot(fig)
+                    plt.close(fig)
+            
+                else:
+                    st.info("No existen variables numéricas.")
+            
+            else:
+            
+                if len(variables_numericas) >= 2:
+            
+                    correlacion = df[variables_numericas].corr()
+            
+                    fig, ax = plt.subplots(figsize=(6, 4))
+            
+                    heatmap = sns.heatmap(
+                        correlacion,
+                        annot=True,
+                        fmt=".2f",
+                        cmap="coolwarm",
+                        center=0,
+                        vmin=-1,
+                        vmax=1,
+                        annot_kws={"fontsize": 7},
+                        cbar_kws={"shrink": 0.7},
+                        ax=ax
+                    )
+            
+                    heatmap.collections[0].colorbar.ax.tick_params(
+                        labelsize=7
+                    )
+            
+                    ax.set_title("Matriz de correlación")
+                    ax.tick_params(axis="x", rotation=45, labelsize=8)
+                    ax.tick_params(axis="y", rotation=0, labelsize=8)
+            
+                    plt.tight_layout()
+                    st.pyplot(fig, use_container_width=False)
+                    plt.close(fig)
+            
+                else:
+                    st.info(
+                        "Se necesitan al menos dos variables numéricas "
+                        "para calcular la correlación."
+                    )
+            
+            
+            # =========================================================
+            # 4. INSIGHTS PRINCIPALES AUTOMÁTICOS
+            # =========================================================
+            
+            st.subheader("Insights principales derivados del EDA")
+            
+            hallazgos = []
+            
+            # Hallazgos sobre valores nulos
+            if total_nulos == 0:
+                hallazgos.append(
+                    "✅ El conjunto de datos no presenta valores nulos."
+                )
+            else:
+                columna_mas_nulos = df.isna().sum().idxmax()
+                cantidad_mas_nulos = df[columna_mas_nulos].isna().sum()
+            
+                hallazgos.append(
+                    f"⚠️ Se encontraron **{total_nulos:,} valores nulos**. "
+                    f"La variable con más datos faltantes es "
+                    f"**{columna_mas_nulos}**, con {cantidad_mas_nulos:,}."
+                )
+            
+            # Hallazgos categóricos
+            for variable in variables_categoricas[:3]:
+            
+                datos = df[variable].dropna()
+            
+                if not datos.empty:
+                    categoria_principal = datos.mode().iloc[0]
+                    porcentaje = datos.value_counts(normalize=True).iloc[0] * 100
+            
+                    hallazgos.append(
+                        f"📌 En **{variable}**, la categoría más frecuente es "
+                        f"**{categoria_principal}**, con el {porcentaje:.1f}% "
+                        f"de los registros válidos."
+                    )
+            
+            # Hallazgos numéricos
+            for variable in variables_numericas[:3]:
+            
+                media = df[variable].mean()
+                mediana = df[variable].median()
+            
+                if pd.notna(media) and pd.notna(mediana):
+                    if media > mediana:
+                        forma = "posible asimetría hacia valores altos"
+                    elif media < mediana:
+                        forma = "posible asimetría hacia valores bajos"
+                    else:
+                        forma = "una distribución aproximadamente equilibrada"
+            
+                    hallazgos.append(
+                        f"📊 **{variable}** presenta una media de "
+                        f"**{media:.2f}** y una mediana de **{mediana:.2f}**, "
+                        f"lo que sugiere {forma}."
+                    )
+            
+            # Hallazgo de correlación
+            if len(variables_numericas) >= 2:
+            
+                matriz = df[variables_numericas].corr().abs()
+            
+                # Eliminar diagonal y duplicados
+                pares = (
+                    matriz.where(
+                        ~pd.np.tril(
+                            pd.np.ones(matriz.shape)
+                        ).astype(bool)
+                    )
+                    .stack()
+                )
+            
+                if not pares.empty:
+                    variable_1, variable_2 = pares.idxmax()
+                    correlacion_maxima = df[
+                        [variable_1, variable_2]
+                    ].corr().iloc[0, 1]
+            
+                    hallazgos.append(
+                        f"🔗 La relación lineal más destacada se presenta entre "
+                        f"**{variable_1}** y **{variable_2}**, con una correlación "
+                        f"de **{correlacion_maxima:.2f}**."
+                    )
+            
+            if hallazgos:
+                for hallazgo in hallazgos:
+                    st.markdown(f"- {hallazgo}")
+            else:
+                st.info("No fue posible generar hallazgos automáticos.")
+            
+            
+            # =========================================================
+            # 5. CONCLUSIÓN EDITABLE
+            # =========================================================
+            
+            st.subheader("Conclusión general")
+            
+            conclusion = st.text_area(
+                "Puedes editar o complementar la conclusión:",
+                value=(
+                    "El análisis exploratorio permitió identificar las principales "
+                    "características, distribuciones y relaciones presentes en los "
+                    "datos filtrados. Estos hallazgos pueden utilizarse como base "
+                    "para análisis posteriores y para la toma de decisiones."
+                ),
+                height=130
+            )
+            
+            st.success(conclusion)
+
             
             
             
