@@ -829,7 +829,7 @@ else:
           
             var_numericas = obtener_var_numericas(df)
             var_categoricas = obtener_var_categoricas(df)
-            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:21px;">Filtros</p>', 
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Filtros</p>', 
                             unsafe_allow_html=True)   
 
             # Copia del DataFrame sobre la cual se aplicarán los filtros
@@ -886,18 +886,11 @@ else:
                 # Aplicar filtro numérico
                 df_filtrado = df_filtrado[serie.between(rango_seleccionado[0], rango_seleccionado[1], inclusive="both")]
 
-                # ==========================================================
-                # 3. MOSTRAR RESULTADO
-                # ==========================================================
-                #st.write(f"Registros originales: **{len(df)}** | Registros filtrados: **{len(df_filtrado)}**")
-                
-                #st.dataframe(df_filtrado, use_container_width=True)
-
-
+               
                 # ==========================================================
                 # 3. VALIDACIÓN Y RESUMEN DEL FILTRADO
                 # ==========================================================
-                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-center:left; font-size:21px;">Análisis basado en parámetros seleccionados</p>', 
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Análisis basado en parámetros seleccionados</p>', 
                             unsafe_allow_html=True)   
                                 
                 total_original = len(df)
@@ -952,7 +945,7 @@ else:
                 # ==========================================================
                 
                 if numericas_analisis:
-                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-center:left; font-size:18px;">Distribución de variables numéricas</p>', 
+                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Distribución de variables numéricas</p>', 
                             unsafe_allow_html=True)   
                                    
                     for variable in numericas_analisis:
@@ -1038,8 +1031,9 @@ else:
                 # ==========================================================
                 
                 if len(numericas_analisis) >= 2:
-                
-                    st.subheader("Relación entre variables numéricas")
+                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Relación entre variables numéricas</p>', 
+                            unsafe_allow_html=True)
+                    #st.subheader("Relación entre variables numéricas")
                 
                     datos_correlacion = (
                         df_filtrado[numericas_analisis]
@@ -1097,7 +1091,7 @@ else:
                 # ==========================================================
                 
                 if categoricas_analisis and numericas_analisis:
-                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-left:left; font-size:21px;">Comparación entre variables categóricas y numéricas</p>', 
+                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Comparación entre variables categóricas y numéricas</p>', 
                             unsafe_allow_html=True)   
                                     
                     # Se generan todas las combinaciones disponibles.
