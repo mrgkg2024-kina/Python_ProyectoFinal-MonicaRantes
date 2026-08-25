@@ -1174,7 +1174,7 @@ else:
                 }
             
                 div[data-testid="stMetricLabel"] p {
-                    color: #FFFFFF;       /* Color del título */
+                    color: #000000;       /* Color del título */
                     font-size: 14px;      /* Tamaño del título */
                     font-weight: 600;
                     text-align: center;
