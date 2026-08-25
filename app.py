@@ -198,9 +198,9 @@ else:
 # Carga del archivo
 # -----------------------------------------------------------------------------
     with st.sidebar:
-        st.markdown("### Panel de segmentación")
+        st.markdown("### Archivo fuente")
         st.markdown(
-            '<div class="filter-caption">Los gráficos y KPIs responden a todos los filtros seleccionados.</div>',
+            '<div class="filter-caption">Realiza el upload del archivo a ser analizado:</div>',
             unsafe_allow_html=True,
         )
         uploaded_file = st.file_uploader(
