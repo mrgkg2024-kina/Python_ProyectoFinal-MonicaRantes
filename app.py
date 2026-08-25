@@ -1152,9 +1152,9 @@ else:
             # =========================================================
             # 2. RESUMEN GENERAL
             # =========================================================
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:21px;">Resumen general</p>', 
+                        unsafe_allow_html=True)   
             
-            st.subheader("Resumen general")
-
             #Dando formato a las métricas
             st.markdown(
                 """
@@ -1181,7 +1181,7 @@ else:
                 [data-testid="stMetricLabel"],
                 [data-testid="stMetricLabel"] * {
                     color: #FFD166 !important;
-                    font-size: 14px !important;
+                    font-size: 20px !important;
                     font-weight: 600 !important;
                     text-align: center !important;
                 }
@@ -1213,7 +1213,6 @@ else:
                 unsafe_allow_html=True
             )
                         
-            
             total_nulos = int(df.isna().sum().sum())
             col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -1228,9 +1227,9 @@ else:
             # =========================================================
             # 3. VISUALIZACIÓN RESUMEN
             # =========================================================
-            
-            st.subheader("Visualización resumen")
-            
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:21px;">Visualización resumen</p>', 
+                        unsafe_allow_html=True)
+                        
             tipo_grafico = st.selectbox(
                 "Selecciona el tipo de resumen:",
                 [
@@ -1243,10 +1242,7 @@ else:
             if tipo_grafico == "Distribución de variable categórica":
             
                 if variables_categoricas:
-                    variable = st.selectbox(
-                        "Variable categórica:",
-                        variables_categoricas
-                    )
+                    variable = st.selectbox("Variable categórica:", variables_categoricas)
             
                     frecuencias = (
                         df[variable]
@@ -1287,10 +1283,7 @@ else:
             elif tipo_grafico == "Distribución de variable numérica":
             
                 if variables_numericas:
-                    variable = st.selectbox(
-                        "Variable numérica:",
-                        variables_numericas
-                    )
+                    variable = st.selectbox("Variable numérica:", variables_numericas)
             
                     fig, ax = plt.subplots(figsize=(5, 3))
             
@@ -1321,10 +1314,7 @@ else:
                     )
             
                     # Título
-                    ax.set_title(
-                        f"Distribución de {variable}",
-                        fontsize=7
-                    )
+                    ax.set_title(f"Distribución de {variable}", fontsize=7)
                     
                     # Nombres de los ejes
                     ax.set_xlabel(variable, fontsize=5)
@@ -1371,9 +1361,7 @@ else:
                         ax=ax
                     )
             
-                    heatmap.collections[0].colorbar.ax.tick_params(
-                        labelsize=7
-                    )
+                    heatmap.collections[0].colorbar.ax.tick_params(labelsize=7)
             
                     ax.set_title("Matriz de correlación")
                     ax.tick_params(axis="x", rotation=45, labelsize=6)
@@ -1384,18 +1372,14 @@ else:
                     plt.close(fig)
             
                 else:
-                    st.info(
-                        "Se necesitan al menos dos variables numéricas "
-                        "para calcular la correlación."
-                    )
-            
-            
+                    st.info("Se necesitan al menos dos variables numéricas para calcular la correlación.")
+           
             # =========================================================
             # 4. INSIGHTS PRINCIPALES 
             # =========================================================
-            
-            st.subheader("Insights principales derivados del EDA")
-            
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:21px;">Insights principales  - derivados del EDA"</p>', 
+                        unsafe_allow_html=True)
+                       
             hallazgos = []
             
             # Hallazgos sobre valores nulos
@@ -1474,19 +1458,3 @@ else:
                 st.info("No fue posible generar hallazgos automáticos.")
             
             
-            
-            
-            
-                            
-            
-                            
-            
-            
-
-
-            
-
-
-
-
-
