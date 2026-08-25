@@ -1265,12 +1265,20 @@ else:
                         ax=ax
                     )
             
-                    ax.set_title(f"Distribución de {variable}")
-                    ax.set_xlabel("Cantidad de registros")
-                    ax.set_ylabel(variable)
+                    ax.set_title(f"Distribución de {variable}", fontsize=10, fontweight="bold", fontfamily="sans-serif")
+                    ax.set_xlabel("Cantidad de registros", fontsize=8, fontfamily="sans-serif")
+                    ax.set_ylabel(variable, fontsize=8, fontfamily="sans-serif")
+
+                    # Etiquetas y valores de ambos ejes
+                    ax.tick_params(axis="x", labelsize=7)
+                    ax.tick_params(axis="y", labelsize=7)
+
+                    # Cambiar la fuente de los valores de los ejes
+                    for etiqueta in ax.get_xticklabels() + ax.get_yticklabels():
+                        etiqueta.set_fontfamily("sans-serif")
             
                     plt.tight_layout()
-                    st.pyplot(fig)
+                    st.pyplot(fig, use_container_width=False)
                     plt.close(fig)
             
                 else:
