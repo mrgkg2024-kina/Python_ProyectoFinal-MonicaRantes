@@ -1369,18 +1369,10 @@ else:
             
             # Hallazgo de correlación
             if len(variables_numericas) >= 2:
-            
-                matriz = df[variables_numericas].corr().abs()
-            
-                # Eliminar diagonal y duplicados
-                pares = (
-                    matriz.where(
-                        ~pd.np.tril(
-                            pd.np.ones(matriz.shape)
-                        ).astype(bool)
-                    )
-                    .stack()
-                )
+                matriz = df[variables_numericas].corr()
+                mascara = np.triu(np.ones(matriz.shape, dtype=bool), k=1)
+
+                pares = matriz.where(mascara).stack()
             
                 if not pares.empty:
                     variable_1, variable_2 = pares.idxmax()
