@@ -1314,23 +1314,23 @@ else:
                     # Título
                     ax.set_title(
                         f"Distribución de {variable}",
-                        fontsize=8
+                        fontsize=7
                     )
                     
                     # Nombres de los ejes
-                    ax.set_xlabel(variable, fontsize=6)
-                    ax.set_ylabel("Frecuencia", fontsize=6)
+                    ax.set_xlabel(variable, fontsize=5)
+                    ax.set_ylabel("Frecuencia", fontsize=5)
                     
                     # Números de los ejes
                     ax.tick_params(
                         axis="both",
-                        labelsize=6
+                        labelsize=5
                     )
                     
                     # Leyenda de media y mediana
                     ax.legend(
-                        fontsize=6,
-                        title_fontsize=7
+                        fontsize=4,
+                        title_fontsize=5
                     )
 
             
