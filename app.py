@@ -1398,7 +1398,7 @@ else:
                 )
             
             # Hallazgos categóricos
-            for variable in variables_categoricas[:3]:
+            for variable in var2_categoricas[:3]:
             
                 datos = df[variable].dropna()
             
@@ -1413,7 +1413,7 @@ else:
                     )
             
             # Hallazgos numéricos
-            for variable in variables_numericas[:3]:
+            for variable in var2_numericas[:3]:
             
                 media = df[variable].mean()
                 mediana = df[variable].median()
