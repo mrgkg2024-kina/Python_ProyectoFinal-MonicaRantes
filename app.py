@@ -904,7 +904,7 @@ else:
             col1.metric("Registros originales", total_original)
             col2.metric("Registros filtrados", total_filtrado)
             col3.metric("Registros eliminados", total_eliminado)
-            col4.metric("Datos conservados", f"{porcentaje_conservado:.1f}%")
+            col4.metric("Datos conservados", f"{porcentaje_conservado:.2f}%")
                 
                 
             if df_filtrado.empty:
@@ -1181,7 +1181,7 @@ else:
                 [data-testid="stMetricLabel"],
                 [data-testid="stMetricLabel"] * {
                     color: #FFD166 !important;
-                    font-size: 20px !important;
+                    font-size: 16px !important;
                     font-weight: 600 !important;
                     text-align: center !important;
                 }
@@ -1198,7 +1198,7 @@ else:
                 [data-testid="stMetricValue"],
                 [data-testid="stMetricValue"] * {
                     color: #FFFFFF !important;
-                    font-size: 24px !important;
+                    font-size: 20px !important;
                     font-weight: 700 !important;
                     text-align: center !important;
                 }
