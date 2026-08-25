@@ -23,7 +23,7 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 2. Las opciones de menú son Home: y Carga del dataset.
 3. En la carga del dataset, seleccionar el archivo BankMarketing.csv
 4. Una vez cargada la vista previa del dataset. visualizar cada uno de los items (tabs).
-   ![SuperMarket Plus BI](assets/supermarket-plus-bi.png)
+   ![Vista preliminar](Capturas/Vista_preliminar.png)
 
 ## Funcionalidades
 - Carga del Dataset 
