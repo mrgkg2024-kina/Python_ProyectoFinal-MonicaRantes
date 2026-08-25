@@ -1257,7 +1257,7 @@ else:
                         .sort_values()
                     )
             
-                    fig, ax = plt.subplots(figsize=(7, 4))
+                    fig, ax = plt.subplots(figsize=(5, 3))
             
                     frecuencias.plot(
                         kind="barh",
@@ -1284,7 +1284,7 @@ else:
                         variables_numericas
                     )
             
-                    fig, ax = plt.subplots(figsize=(7, 4))
+                    fig, ax = plt.subplots(figsize=(5, 3))
             
                     sns.histplot(
                         data=df,
@@ -1327,7 +1327,7 @@ else:
             
                     correlacion = df[variables_numericas].corr()
             
-                    fig, ax = plt.subplots(figsize=(6, 4))
+                    fig, ax = plt.subplots(figsize=(5, 3))
             
                     heatmap = sns.heatmap(
                         correlacion,
@@ -1337,7 +1337,7 @@ else:
                         center=0,
                         vmin=-1,
                         vmax=1,
-                        annot_kws={"fontsize": 7},
+                        annot_kws={"fontsize": 5},
                         cbar_kws={"shrink": 0.7},
                         ax=ax
                     )
@@ -1347,8 +1347,8 @@ else:
                     )
             
                     ax.set_title("Matriz de correlación")
-                    ax.tick_params(axis="x", rotation=45, labelsize=8)
-                    ax.tick_params(axis="y", rotation=0, labelsize=8)
+                    ax.tick_params(axis="x", rotation=45, labelsize=6)
+                    ax.tick_params(axis="y", rotation=0, labelsize=6)
             
                     plt.tight_layout()
                     st.pyplot(fig, use_container_width=False)
@@ -1362,7 +1362,7 @@ else:
             
             
             # =========================================================
-            # 4. INSIGHTS PRINCIPALES AUTOMÁTICOS
+            # 4. INSIGHTS PRINCIPALES 
             # =========================================================
             
             st.subheader("Insights principales derivados del EDA")
