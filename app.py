@@ -1049,15 +1049,15 @@ else:
                         vmin=-1,
                         vmax=1,
                         linewidths=0.3,
-                        annot_kws={"fontsize": 6},
-                        cbar_kws={"shrink": 0.65},
+                        annot_kws={"fontsize": 4},
+                        cbar_kws={"shrink": 0.4},
                         ax=ax
                     )
                 
-                    ax.set_title("Matriz de correlación", fontsize=8,  pad=6)
-                    ax.tick_params(axis="x", labelsize=6, rotation=45)
+                    ax.set_title("Matriz de correlación", fontsize=6,  pad=7)
+                    ax.tick_params(axis="x", labelsize=4, rotation=45)
 
-                    ax.tick_params(axis="y", labelsize=6, rotation=0)
+                    ax.tick_params(axis="y", labelsize=4, rotation=0)
                 
                     plt.tight_layout()
                     st.pyplot(fig)
