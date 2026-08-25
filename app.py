@@ -1159,8 +1159,8 @@ else:
             st.markdown(
                 """
                 <style>
-                /* Contenedor de cada métrica */
-                div[data-testid="stMetric"] {
+                /* Tarjeta de cada métrica */
+                [data-testid="stMetric"] {
                     background-color: #1E3A5F;
                     border: 1px solid #4C78A8;
                     border-radius: 12px;
@@ -1169,37 +1169,50 @@ else:
                 }
             
                 /* Contenedor del título */
-                div[data-testid="stMetricLabel"] {
-                    justify-content: center;
-                    text-align: center;
-                    width: 100%;
+                [data-testid="stMetricLabel"] {
+                    display: flex !important;
+                    justify-content: center !important;
+                    align-items: center !important;
+                    width: 100% !important;
+                    text-align: center !important;
                 }
             
-                /* Texto del título: compatible con distintas versiones */
-                div[data-testid="stMetricLabel"],
-                div[data-testid="stMetricLabel"] p,
-                div[data-testid="stMetricLabel"] div,
-                div[data-testid="stMetricLabel"] span {
+                /* Todos los elementos internos del título */
+                [data-testid="stMetricLabel"],
+                [data-testid="stMetricLabel"] * {
                     color: #FFD166 !important;
                     font-size: 14px !important;
                     font-weight: 600 !important;
+                    text-align: center !important;
                 }
             
-                /* Valor de la métrica */
-                div[data-testid="stMetricValue"],
-                div[data-testid="stMetricValue"] div {
+                /* Contenedor del valor */
+                [data-testid="stMetricValue"] {
+                    display: flex !important;
+                    justify-content: center !important;
+                    width: 100% !important;
+                    text-align: center !important;
+                }
+            
+                /* Texto del valor */
+                [data-testid="stMetricValue"],
+                [data-testid="stMetricValue"] * {
                     color: #FFFFFF !important;
                     font-size: 24px !important;
-                    font-weight: bold !important;
-                    text-align: center;
-                    width: 100%;
+                    font-weight: 700 !important;
+                    text-align: center !important;
+                }
+            
+                /* Icono de ayuda, en caso de existir */
+                [data-testid="stMetricLabel"] svg {
+                    fill: #FFD166 !important;
+                    color: #FFD166 !important;
                 }
                 </style>
                 """,
                 unsafe_allow_html=True
-            )    
-
-            
+            )
+                        
             
             total_nulos = int(df.isna().sum().sum())
             col1, col2, col3, col4, col5 = st.columns(5)
