@@ -1284,13 +1284,13 @@ else:
                         variables_numericas
                     )
             
-                    fig, ax = plt.subplots(figsize=(4, 3))
+                    fig, ax = plt.subplots(figsize=(4, 2))
             
                     sns.histplot(
                         data=df,
                         x=variable,
                         kde=True,
-                        color="#59A14F",
+                        color="steelblue",
                         ax=ax
                     )
             
