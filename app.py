@@ -1265,13 +1265,13 @@ else:
                         ax=ax
                     )
             
-                    ax.set_title(f"Distribución de {variable}", fontsize=10, fontweight="bold", fontfamily="sans-serif")
-                    ax.set_xlabel("Cantidad de registros", fontsize=8, fontfamily="sans-serif")
-                    ax.set_ylabel(variable, fontsize=8, fontfamily="sans-serif")
+                    ax.set_title(f"Distribución de {variable}", fontsize=8, fontweight="bold", fontfamily="sans-serif")
+                    ax.set_xlabel("Cantidad de registros", fontsize=6, fontfamily="sans-serif")
+                    ax.set_ylabel(variable, fontsize=6, fontfamily="sans-serif")
 
                     # Etiquetas y valores de ambos ejes
-                    ax.tick_params(axis="x", labelsize=7)
-                    ax.tick_params(axis="y", labelsize=7)
+                    ax.tick_params(axis="x", labelsize=6)
+                    ax.tick_params(axis="y", labelsize=6)
 
                     # Cambiar la fuente de los valores de los ejes
                     for etiqueta in ax.get_xticklabels() + ax.get_yticklabels():
