@@ -1036,7 +1036,7 @@ else:
                     fig, ax = plt.subplots(
                         figsize=(
                             max(3, len(columnas_validas)* 0.55),
-                            max(2, len(columnas_validas) * 0.50)
+                            max(2, len(columnas_validas) * 0.40)
                         )
                     )
                 
@@ -1049,13 +1049,13 @@ else:
                         vmin=-1,
                         vmax=1,
                         linewidths=0.3,
-                        annot_kws={"fontsize": 3},
+                        annot_kws={"fontsize": 4},
                         cbar_kws={"shrink": 0.5},
                         ax=ax
                     )
                 
-                    ax.set_title("Matriz de correlación", fontsize=6,  pad=7)
-                    ax.tick_params(axis="x", labelsize=5, rotation=45)
+                    ax.set_title("Matriz de correlación", fontsize=6,  pad=6)
+                    ax.tick_params(axis="x", labelsize=4, rotation=45)
 
                     ax.tick_params(axis="y", labelsize=5, rotation=0)
                 
