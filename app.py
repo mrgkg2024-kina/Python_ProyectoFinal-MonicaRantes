@@ -1311,8 +1311,28 @@ else:
                         label=f"Mediana: {mediana:.2f}"
                     )
             
-                    ax.set_title(f"Distribución de {variable}")
-                    ax.legend()
+                    # Título
+                    ax.set_title(
+                        f"Distribución de {variable}",
+                        fontsize=8
+                    )
+                    
+                    # Nombres de los ejes
+                    ax.set_xlabel(variable, fontsize=6)
+                    ax.set_ylabel("Frecuencia", fontsize=6)
+                    
+                    # Números de los ejes
+                    ax.tick_params(
+                        axis="both",
+                        labelsize=6
+                    )
+                    
+                    # Leyenda de media y mediana
+                    ax.legend(
+                        fontsize=6,
+                        title_fontsize=7
+                    )
+
             
                     plt.tight_layout()
                     st.pyplot(fig)
