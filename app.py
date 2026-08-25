@@ -887,294 +887,250 @@ else:
                 df_filtrado = df_filtrado[serie.between(rango_seleccionado[0], rango_seleccionado[1], inclusive="both")]
 
                
-                # ==========================================================
-                # 3. VALIDACIÓN Y RESUMEN DEL FILTRADO
-                # ==========================================================
-                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Análisis basado en parámetros seleccionados</p>', 
-                            unsafe_allow_html=True)   
+            # ==========================================================
+            # 3. VALIDACIÓN Y RESUMEN DEL FILTRADO
+            # ==========================================================
+            st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Análisis basado en parámetros seleccionados</p>', 
+                        unsafe_allow_html=True)   
                                 
-                total_original = len(df)
-                total_filtrado = len(df_filtrado)
-                total_eliminado = total_original - total_filtrado
+            total_original = len(df)
+            total_filtrado = len(df_filtrado)
+            total_eliminado = total_original - total_filtrado
                 
-                porcentaje_conservado = (total_filtrado / total_original * 100 if total_original > 0 else 0)
+            porcentaje_conservado = (total_filtrado / total_original * 100 if total_original > 0 else 0)
                 
-                col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4 = st.columns(4)
                 
-                col1.metric("Registros originales", total_original)
-                col2.metric("Registros filtrados", total_filtrado)
-                col3.metric("Registros eliminados", total_eliminado)
-                col4.metric("Datos conservados", f"{porcentaje_conservado:.1f}%")
-                
-                
-                if df_filtrado.empty:
-                    st.warning("No existen registros para analizar con los filtros aplicados.")
-                    st.stop()
-                
-                # ==========================================================
-                # 4. DETERMINAR LAS VARIABLES QUE SE ANALIZARÁN
-                # ==========================================================
-                
-                # Se analizan las columnas que el usuario seleccionó como filtros.
-                numericas_analisis = [
-                    columna
-                    for columna in columnas_numericas_filtro
-                    if columna in df_filtrado.columns
-                ]
-                
-                categoricas_analisis = [
-                    columna
-                    for columna in columnas_categoricas_filtro
-                    if columna in df_filtrado.columns
-                ]
+            col1.metric("Registros originales", total_original)
+            col2.metric("Registros filtrados", total_filtrado)
+            col3.metric("Registros eliminados", total_eliminado)
+            col4.metric("Datos conservados", f"{porcentaje_conservado:.1f}%")
                 
                 
-                # Si no se seleccionaron filtros, se pueden usar todas las variables.
-                if not numericas_analisis and not categoricas_analisis:
-                    st.info(
-                        "No se seleccionaron columnas para filtrar. "
-                        "Se mostrarán gráficos generales del conjunto de datos."
-                    )
+            if df_filtrado.empty:
+                st.warning("No existen registros para analizar con los filtros aplicados.")
+                st.stop()
                 
-                    # Se limita la cantidad para no saturar la aplicación.
-                    numericas_analisis = var_numericas[:4]
-                    categoricas_analisis = var_categoricas[:4]
+            # ==========================================================
+            # 4. DETERMINAR LAS VARIABLES QUE SE ANALIZARÁN
+            # ==========================================================
+                
+            # Se analizan las columnas que el usuario seleccionó como filtros.
+            numericas_analisis = [columna for columna in columnas_numericas_filtro if columna in df_filtrado.columns]
+                
+            categoricas_analisis = [columna for columna in columnas_categoricas_filtro if columna in df_filtrado.columns]
+                
+                
+            # Si no se seleccionaron filtros, se pueden usar todas las variables.
+            if not numericas_analisis and not categoricas_analisis:
+                st.info("No se seleccionaron columnas para filtrar. Se mostrarán gráficos generales del conjunto de datos.")
+                
+                # Se limita la cantidad para no saturar la aplicación.
+                numericas_analisis = var_numericas[:4]
+                categoricas_analisis = var_categoricas[:4]
 
-                # ==========================================================
-                # 5. GRÁFICOS DE VARIABLES NUMÉRICAS
-                # ==========================================================
+            # ==========================================================
+            # 5. GRÁFICOS DE VARIABLES NUMÉRICAS
+            # ==========================================================
                 
-                if numericas_analisis:
-                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Distribución de variables numéricas</p>', 
-                            unsafe_allow_html=True)   
+            if numericas_analisis:
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Distribución de variables numéricas</p>', 
+                        unsafe_allow_html=True)   
                                    
-                    for variable in numericas_analisis:
+                for variable in numericas_analisis:
                 
-                        datos = pd.to_numeric(df_filtrado[variable], errors="coerce").dropna()
+                    datos = pd.to_numeric(df_filtrado[variable], errors="coerce").dropna()
                 
-                        if datos.empty:
-                            st.warning(f"La variable {variable} no contiene valores válidos.")
-                            continue
+                    if datos.empty:
+                        st.warning(f"La variable {variable} no contiene valores válidos.")
+                        continue
                 
-                        st.markdown(f"#### {variable}")
-                        columna_histograma, columna_boxplot = st.columns([2, 1])
+                    st.markdown(f"#### {variable}")
+                    columna_histograma, columna_boxplot = st.columns([2, 1])
                 
-                        # Histograma
-                        with columna_histograma:
+                    # Histograma
+                    with columna_histograma:
                 
-                            fig, ax = plt.subplots(figsize=(7, 4))
+                        fig, ax = plt.subplots(figsize=(7, 4))
                 
-                            sns.histplot(
-                                datos,
-                                bins="auto",
-                                kde=True,
-                                color="steelblue",
-                                ax=ax
-                            )
-                
-                            ax.axvline(
-                                datos.mean(),
-                                color="red",
-                                linestyle="--",
-                                label=f"Media: {datos.mean():.2f}"
-                            )
-                
-                            ax.axvline(
-                                datos.median(),
-                                color="green",
-                                linestyle=":",
-                                label=f"Mediana: {datos.median():.2f}"
-                            )
-                
-                            ax.set_title(f"Distribución de {variable}")
-                            ax.set_xlabel(variable)
-                            ax.set_ylabel("Frecuencia")
-                            ax.legend()
-                
-                            plt.tight_layout()
-                            st.pyplot(fig)
-                            plt.close(fig)
-                
-                        # Boxplot
-                        with columna_boxplot:
-                
-                            fig, ax = plt.subplots(figsize=(5, 4))
-                
-                            sns.boxplot(
-                                y=datos,
-                                color="orange",
-                                ax=ax
-                            )
-                
-                            ax.set_title(f"Boxplot de {variable}")
-                            ax.set_ylabel(variable)
-                            ax.set_xlabel("")
-                
-                            plt.tight_layout()
-                            st.pyplot(fig)
-                            plt.close(fig)
-                
-                        # Estadísticas descriptivas
-                        with st.expander(f"Ver estadísticas de {variable}"):
-                
-                            resumen = datos.describe().to_frame("Resultado")
-                            resumen.loc["mediana"] = datos.median()
-                            resumen.loc["varianza"] = datos.var()
-                
-                            st.dataframe(
-                                resumen,
-                                use_container_width=True
-                            )
-                
-                # ==========================================================
-                # 7. MATRIZ DE CORRELACIÓN
-                # ==========================================================
-                
-                if len(numericas_analisis) >= 2:
-                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Relación entre variables numéricas</p>', 
-                            unsafe_allow_html=True)
-                    #st.subheader("Relación entre variables numéricas")
-                
-                    datos_correlacion = (
-                        df_filtrado[numericas_analisis]
-                        .apply(pd.to_numeric, errors="coerce")
-                    )
-                
-                    # Eliminar variables constantes, porque su correlación es indefinida.
-                    columnas_validas = [
-                        columna
-                        for columna in datos_correlacion.columns
-                        if datos_correlacion[columna].nunique(dropna=True) > 1
-                    ]
-                
-                    if len(columnas_validas) >= 2:
-                
-                        matriz_correlacion = (
-                            datos_correlacion[columnas_validas]
-                            .corr()
+                        sns.histplot(
+                            datos,
+                             bins="auto",
+                             kde=True,
+                             color="steelblue",
+                             ax=ax
                         )
                 
-                        fig, ax = plt.subplots(
-                            figsize=(
-                                max(7, len(columnas_validas)),
-                                max(5, len(columnas_validas) * 0.7)
-                            )
+                        ax.axvline(
+                            datos.mean(),
+                            color="red",
+                            linestyle="--",
+                            label=f"Media: {datos.mean():.2f}"
                         )
                 
-                        sns.heatmap(
-                            matriz_correlacion,
-                            annot=True,
-                            fmt=".2f",
-                            cmap="coolwarm",
-                            center=0,
-                            vmin=-1,
-                            vmax=1,
-                            linewidths=0.5,
-                            ax=ax
+                        ax.axvline(
+                            datos.median(),
+                            color="green",
+                            linestyle=":",
+                            label=f"Mediana: {datos.median():.2f}"
                         )
                 
-                        ax.set_title("Matriz de correlación")
+                        ax.set_title(f"Distribución de {variable}")
+                        ax.set_xlabel(variable)
+                        ax.set_ylabel("Frecuencia")
+                        ax.legend()
                 
                         plt.tight_layout()
                         st.pyplot(fig)
                         plt.close(fig)
                 
-                    else:
-                        st.info(
-                            "No hay suficientes variables numéricas con variación "
-                            "para calcular la correlación."
-                        )
+                    # Boxplot
+                    with columna_boxplot:
                 
-                
-                # ==========================================================
-                # 8. VARIABLE CATEGÓRICA VS. VARIABLE NUMÉRICA
-                # ==========================================================
-                
-                if categoricas_analisis and numericas_analisis:
-                    st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Comparación entre variables categóricas y numéricas</p>', 
-                            unsafe_allow_html=True)   
-                                    
-                    # Se generan todas las combinaciones disponibles.
-                    combinaciones_mixtas = list(
-                        itertools.product(
-                            categoricas_analisis,
-                            numericas_analisis
-                        )
-                    )
-                
-                    # Evita generar demasiados gráficos.
-                    maximo_graficos_mixtos = 6
-                
-                    if len(combinaciones_mixtas) > maximo_graficos_mixtos:
-                        st.info(
-                            f"Existen {len(combinaciones_mixtas)} combinaciones. "
-                            f"Se mostrarán las primeras {maximo_graficos_mixtos}."
-                        )
-                
-                    for variable_cat, variable_num in (
-                        combinaciones_mixtas[:maximo_graficos_mixtos]
-                    ):
-                
-                        datos_grafico = df_filtrado[
-                            [variable_cat, variable_num]
-                        ].copy()
-                
-                        datos_grafico[variable_cat] = (
-                            datos_grafico[variable_cat]
-                            .astype("string")
-                            .fillna("Sin dato")
-                        )
-                
-                        datos_grafico[variable_num] = pd.to_numeric(
-                            datos_grafico[variable_num],
-                            errors="coerce"
-                        )
-                
-                        datos_grafico = datos_grafico.dropna(
-                            subset=[variable_num]
-                        )
-                
-                        if datos_grafico.empty:
-                            continue
-                
-                        # Ordenar las categorías según la mediana.
-                        orden_categorias = (
-                            datos_grafico
-                            .groupby(variable_cat)[variable_num]
-                            .median()
-                            .sort_values()
-                            .index
-                        )
-                
-                        figura_alto = max(
-                            4,
-                            min(
-                                10,
-                                datos_grafico[variable_cat].nunique() * 0.4
-                            )
-                        )
-                
-                        fig, ax = plt.subplots(figsize=(9, figura_alto))
+                        fig, ax = plt.subplots(figsize=(5, 4))
                 
                         sns.boxplot(
-                            data=datos_grafico,
-                            x=variable_num,
-                            y=variable_cat,
-                            order=orden_categorias,
-                            color="skyblue",
+                            y=datos,
+                            color="orange",
                             ax=ax
                         )
                 
-                        ax.set_title(
-                            f"Distribución de {variable_num} por {variable_cat}"
-                        )
-                
-                        ax.set_xlabel(variable_num)
-                        ax.set_ylabel(variable_cat)
+                        ax.set_title(f"Boxplot de {variable}")
+                        ax.set_ylabel(variable)
+                        ax.set_xlabel("")
                 
                         plt.tight_layout()
                         st.pyplot(fig)
                         plt.close(fig)
+                
+                    # Estadísticas descriptivas
+                    with st.expander(f"Ver estadísticas de {variable}"):
+                
+                        resumen = datos.describe().to_frame("Resultado")
+                        resumen.loc["mediana"] = datos.median()
+                        resumen.loc["varianza"] = datos.var()
+                
+                        st.dataframe(resumen, use_container_width=True)
+                
+            # ==========================================================
+            # 7. MATRIZ DE CORRELACIÓN
+            # ==========================================================
+                
+            if len(numericas_analisis) >= 2:
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Relación entre variables numéricas</p>', 
+                        unsafe_allow_html=True)
+                    
+                datos_correlacion = (df_filtrado[numericas_analisis].apply(pd.to_numeric, errors="coerce"))
+                
+                # Eliminar variables constantes, porque su correlación es indefinida.
+                columnas_validas = [
+                    columna
+                    for columna in datos_correlacion.columns
+                    if datos_correlacion[columna].nunique(dropna=True) > 1
+                ]
+                
+                if len(columnas_validas) >= 2:
+                
+                    matriz_correlacion = (datos_correlacion[columnas_validas].corr())
+                
+                    fig, ax = plt.subplots(
+                        figsize=(
+                            max(7, len(columnas_validas)),
+                            max(5, len(columnas_validas) * 0.7)
+                        )
+                    )
+                
+                    sns.heatmap(
+                        matriz_correlacion,
+                        annot=True,
+                        fmt=".2f",
+                        cmap="coolwarm",
+                        center=0,
+                        vmin=-1,
+                        vmax=1,
+                        linewidths=0.5,
+                        ax=ax
+                    )
+                
+                    ax.set_title("Matriz de correlación")
+                
+                    plt.tight_layout()
+                    st.pyplot(fig)
+                    plt.close(fig)
+                
+                else:
+                    st.info("No hay suficientes variables numéricas con variación para calcular la correlación.")
+                
+                
+            # ==========================================================
+            # 8. VARIABLE CATEGÓRICA VS. VARIABLE NUMÉRICA
+            # ==========================================================
+                
+            if categoricas_analisis and numericas_analisis:
+                st.markdown('<p style="color:#2b8cbe; font-weight:bold ; text-align:left; font-size:23px;">Comparación entre variables categóricas y numéricas</p>', 
+                        unsafe_allow_html=True)   
+                                    
+                # Se generan todas las combinaciones disponibles.
+                combinaciones_mixtas = list(
+                    itertools.product(
+                        categoricas_analisis,
+                        numericas_analisis
+                    )
+                )
+                
+                # Evita generar demasiados gráficos.
+                maximo_graficos_mixtos = 6
+                
+                if len(combinaciones_mixtas) > maximo_graficos_mixtos:
+                    st.info(f"Existen {len(combinaciones_mixtas)} combinaciones. Se mostrarán las primeras {maximo_graficos_mixtos}.")
+                
+                for variable_cat, variable_num in (
+                    combinaciones_mixtas[:maximo_graficos_mixtos]
+                ):
+                
+                    datos_grafico = df_filtrado[[variable_cat, variable_num]].copy()
+                
+                    datos_grafico[variable_cat] = (datos_grafico[variable_cat].astype("string").fillna("Sin dato"))
+                
+                    datos_grafico[variable_num] = pd.to_numeric(datos_grafico[variable_num], errors="coerce")
+                
+                    datos_grafico = datos_grafico.dropna(subset=[variable_num])
+                
+                    if datos_grafico.empty:
+                        continue
+                
+                    # Ordenar las categorías según la mediana.
+                    orden_categorias = (
+                        datos_grafico
+                        .groupby(variable_cat)[variable_num]
+                        .median()
+                        .sort_values()
+                        .index
+                    )
+                
+                    figura_alto = max(
+                            4,
+                            min(10, datos_grafico[variable_cat].nunique() * 0.4))
+                
+                    fig, ax = plt.subplots(figsize=(9, figura_alto))
+                
+                    sns.boxplot(
+                        data=datos_grafico,
+                        x=variable_num,
+                        y=variable_cat,
+                        order=orden_categorias,
+                        color="skyblue",
+                        ax=ax
+                    )
+                
+                    ax.set_title(f"Distribución de {variable_num} por {variable_cat}")
+                
+                    ax.set_xlabel(variable_num)
+                    ax.set_ylabel(variable_cat)
+                
+                    plt.tight_layout()
+                    st.pyplot(fig)
+                    plt.close(fig)
                 
        
         
