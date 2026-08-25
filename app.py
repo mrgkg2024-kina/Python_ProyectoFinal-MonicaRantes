@@ -200,7 +200,7 @@ else:
     with st.sidebar:
         st.markdown("### Archivo fuente")
         st.markdown(
-            '<div class="filter-caption">Realiza el upload del archivo a ser analizado:</div>',
+            '<div class="filter-caption">Realiza la carga del archivo</div>',
             unsafe_allow_html=True,
         )
         uploaded_file = st.file_uploader(
