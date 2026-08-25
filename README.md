@@ -1,4 +1,4 @@
-#                   ProyectoFinal - DMC
+# ProyectoFinal - DMC
 # Especialización en Python for Analytics - Caso de Estudio N°1
 
 Este caso de estudio se desarrolla como un proyecto aplicado, cuyo entregable principal es una aplicación interactiva 
@@ -6,21 +6,31 @@ construida en Python utilizando Streamlit, orientada al Análisis Exploratorio d
 BankMarketing.csv.
 
 # Contexto del Dataset
+
 El archivo input BankMarketing.csv, corresponde a una institución financiera que busca entender los factores que influyen 
 en la aceptación de sus campañas de marketing. Durante los últimos 6 meses, la efectividad (e = (Ventas/Base)×100%) cayó 
 de 12% a 8%, afectando los bonos de los ejecutivos comerciales.
+Dimensiones del dataset (filas, columnas) = (41188, 21)
 
 ## Estructura
 - app.py
 - requirements
 - README.md
-- Librerias importadas
-  - libreria_clases_proyecto1.py
-  - libreria_funciones_proyecto1.py
 
-## Ejercicios
-- Ejercicio 1 – Flujo de caja con listas
-- Ejercicio 2 – Registro con NumPy, arrays y DataFrame
-- Ejercicio 3 – Uso de funciones desde una librería externa
-- Ejercicio 4 – Uso de clases desde una librería externa con CRUD
+
+## Funcionalidades
+- Carga del Dataset 
+- Vista previa del Dataset
+- Desarrollo de 10 ítems de análisis:
+  - Ítem 1: Información general del dataset 
+  - Ítem 2: Clasificación de variables
+  - Ítem 3: Estadísticas descriptivas
+  - Ítem 4: Análisis de valores faltantes
+  - Ítem 5: Distribución de variables numéricas 
+  - Ítem 6: Análisis de variables categóricas 
+  - Ítem 7: Análisis bivariado (numérico vs categórico)
+  - Ítem 8: Análisis bivariado (categórico vs categórico)
+  - Ítem 9: Análisis basado en parámetros seleccionados 
+  - Ítem 10: Hallazgos clave
+
 **
