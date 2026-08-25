@@ -16,8 +16,14 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 - app.py
 - requirements
 - README.md
-- Dataset / 
+- Dataset/BankMarketing.csv
 
+## Instrucciones de ejecución
+1. Una vez cargada la aplicación, revisar el menú (lado izquierdo).
+2. Las opciones de menú son Home: y Carga del dataset
+3. En la carga del dataset, seleccionar el archivo BankMarketing.csv
+4. Una vez cargada la vista previa del dataset. visualizar cada uno de los items 
+5. 
 
 ## Funcionalidades
 - Carga del Dataset 
