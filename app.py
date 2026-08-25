@@ -1155,6 +1155,45 @@ else:
             
             st.subheader("Resumen general")
 
+            #Dando formato a las métricas
+            st.markdown(
+                """
+                <style>
+                /* Contenedor de cada métrica */
+                div[data-testid="stMetric"] {
+                    background-color: #1E3A5F; /* Color de fondo */
+                    border: 1px solid #4C78A8;
+                    border-radius: 12px;
+                    padding: 15px 10px;
+                    text-align: center;
+                }
+            
+                /* Título de la métrica */
+                div[data-testid="stMetricLabel"] {
+                    justify-content: center;
+                }
+            
+                div[data-testid="stMetricLabel"] p {
+                    color: #FFFFFF;       /* Color del título */
+                    font-size: 14px;      /* Tamaño del título */
+                    font-weight: 600;
+                    text-align: center;
+                    width: 100%;
+                }
+            
+                /* Valor de la métrica */
+                div[data-testid="stMetricValue"] {
+                    color: #FFD166;       /* Color del valor */
+                    font-size: 12px;      /* Tamaño del valor */
+                    font-weight: bold;
+                    text-align: center;
+                    width: 100%;
+                }
+                </style>
+                """,
+                unsafe_allow_html=True
+            )
+            
             total_nulos = int(df.isna().sum().sum())
             col1, col2, col3, col4, col5 = st.columns(5)
 
