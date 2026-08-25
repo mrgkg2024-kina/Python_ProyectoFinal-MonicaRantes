@@ -1154,24 +1154,16 @@ else:
             # =========================================================
             
             st.subheader("Resumen general")
-            
+
+            total_nulos = int(df.isna().sum().sum())
             col1, col2, col3, col4, col5 = st.columns(5)
-            
+
             col1.metric("Registros", f"{len(df):,}")
             col2.metric("Variables", df.shape[1])
             col3.metric("Variables numéricas", len(variables_numericas))
             col4.metric("Variables categóricas", len(variables_categoricas))
+            col5.metric("Valores nulos", f"{total_nulos:,}")
             
-            total_nulos = int(df.isna().sum().sum())
-            porcentaje_nulos = (total_nulos / df.size) * 100 if df.size > 0 else 0
-            
-            #st.metric(
-            col5.metric(
-                "Valores nulos",
-                f"{total_nulos:,}",
-                f"{porcentaje_nulos:.2f}% del total",
-                delta_color="off"
-            )
             
             
             # =========================================================
