@@ -16,6 +16,7 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 - app.py
 - requirements
 - README.md
+- Dataset / 
 
 
 ## Funcionalidades
@@ -33,4 +34,3 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
   - Ítem 9: Análisis basado en parámetros seleccionados 
   - Ítem 10: Hallazgos clave
 
-**
