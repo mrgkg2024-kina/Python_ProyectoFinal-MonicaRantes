@@ -1,4 +1,4 @@
-# ProyectoFinal DMC - Caso de Estudio N°1
+# Proyecto Final DMC - Caso de Estudio N°1
 
 Este caso de estudio se desarrolla como un proyecto aplicado, cuyo entregable principal es una aplicación interactiva 
 construida en Python utilizando Streamlit, orientada al Análisis Exploratorio de Datos (EDA) del dataset 
