@@ -16,6 +16,7 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 - requirements
 - README.md
 - Dataset/BankMarketing.csv
+- Capturas
 
 ## Instrucciones de ejecución
 1. Una vez cargada la aplicación, revisar el menú (lado izquierdo).
