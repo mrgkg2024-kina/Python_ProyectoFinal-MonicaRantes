@@ -36,7 +36,7 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 - Carga del Dataset 
 - Vista previa del Dataset
 - Desarrollo de 10 ítems de análisis:
-  ###- Ítem 1: Información general del dataset
+  ### - Ítem 1: Información general del dataset
 
     ![Item1](Capturas/Item1.png)  
 
