@@ -23,6 +23,7 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 2. Las opciones de menú son Home: y Carga del dataset.
 3. En la carga del dataset, seleccionar el archivo BankMarketing.csv
 4. Una vez cargada la vista previa del dataset. visualizar cada uno de los items (tabs).
+   
    ![Vista preliminar](Capturas/Vista_preliminar.png)
 
 ## Funcionalidades
@@ -30,8 +31,8 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 - Vista previa del Dataset
 - Desarrollo de 10 ítems de análisis:
   - Ítem 1: Información general del dataset
-     
 
+    ![V](Capturas/Item1.png)  
 
   - Ítem 2: Clasificación de variables
   - Ítem 3: Estadísticas descriptivas
