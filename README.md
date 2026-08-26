@@ -20,6 +20,12 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 ## Instrucciones de ejecución
 1. Una vez cargada la aplicación, revisar el menú (lado izquierdo).
 2. Las opciones de menú son Home: y Carga del dataset.
+
+   ![Home](Capturas/Home.png)
+
+   ![Carga_dataset](Capturas/Carga_dataset.png)
+   
+   
 3. En la carga del dataset, seleccionar el archivo BankMarketing.csv
 4. Una vez cargada la vista previa del dataset. visualizar cada uno de los items (tabs).
    
