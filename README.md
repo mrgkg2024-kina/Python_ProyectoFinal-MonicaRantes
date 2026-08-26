@@ -1,5 +1,4 @@
-# ProyectoFinal - DMC
-# Especialización en Python for Analytics - Caso de Estudio N°1
+# ProyectoFinal DMC - Caso de Estudio N°1
 
 Este caso de estudio se desarrolla como un proyecto aplicado, cuyo entregable principal es una aplicación interactiva 
 construida en Python utilizando Streamlit, orientada al Análisis Exploratorio de Datos (EDA) del dataset 
@@ -34,37 +33,46 @@ Dimensiones del dataset (filas, columnas) = (41188, 21)
 
     ![Item1](Capturas/Item1.png)  
 
+
   - Ítem 2: Clasificación de variables
 
     ![Item2](Capturas/Item2.png)
+
     
   - Ítem 3: Estadísticas descriptivas
  
     ![Item3](Capturas/Item3.png)
+
     
   - Ítem 4: Análisis de valores faltantes
  
     ![Item4](Capturas/Item4.png)
+
     
   - Ítem 5: Distribución de variables numéricas
 
     ![Item5](Capturas/Item5.png)
+
     
   - Ítem 6: Análisis de variables categóricas
 
     ![Item6](Capturas/Item6.png)
+
     
   - Ítem 7: Análisis bivariado (numérico vs categórico)
  
     ![Item7](Capturas/Item7.png)
+
     
   - Ítem 8: Análisis bivariado (categórico vs categórico)
 
     ![Item8](Capturas/Item8.png)
+
     
   - Ítem 9: Análisis basado en parámetros seleccionados
  
     ![Item9](Capturas/Item9.png)
+
     
   - Ítem 10: Hallazgos clave
  
